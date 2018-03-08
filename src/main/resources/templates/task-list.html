@@ -98,7 +98,7 @@
                 </thead>
                 <tbody>
                     <tr id="todoTableRow" th:each="task : ${tasks}">
-                        <td><span th:text="${task.description}"></span> <span th:if="${#strings.toString(task.targetDate)} == ${today}" class="label label-danger marginleft">Today</span><span th:if="${task.user} != ${task.creator}"><small class="marginleft" style="color: #666666"> from <a th:href="@{/profile(id=${task.creator.id})}"><span th:text="${task.creator.username}"></span></a> </small></span></td>
+                        <td><span th:text="${task.description}"></span> <span th:if="${#strings.toString(task.targetDate)} == ${today}" class="label label-danger marginleft">Today</span><span th:if="${task.user} != ${task.creator}"><small class="marginleft" style="color: #666666"> from <a th:href="@{/profile(id=${task.creator.id})}"><span th:text="${task.creator.firstName}+ ' '+${task.creator.lastName}"></span></a> </small></span></td>
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
                         <td th:if="!${task.completed}"><a th:href="@{/task-complete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Complete" class="btn btn-success btn-sm">I did it!</a></td>
                         <td class="col-md-2">
@@ -124,7 +124,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="task : ${completedTasks}">
-                        <td><span th:text="${task.description}"></span><span th:if="${task.user} != ${task.creator}"><small class="marginleft" style="color: #666666"> from <a th:href="@{/profile(id=${task.creator.id})}"><span th:text="${task.creator.username}"></span></a> </small></span></td>
+                        <td><span th:text="${task.description}"></span><span th:if="${task.user} != ${task.creator}"><small class="marginleft" style="color: #666666"> from <a th:href="@{/profile(id=${task.creator.id})}"><span th:text="${task.creator.firstName} + ' '+ ${task.creator.lastName}"></span></a> </small></span></td>
                         <!--<td th:text="${task.targetDate}"></td>-->
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
                         <td th:if="${task.completed}"><a th:href="@{/task-uncomplete(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Move back to tasks" class="btn btn-danger btn-sm">Incomplete</a></td>

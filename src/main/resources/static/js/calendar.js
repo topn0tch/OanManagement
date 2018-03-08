@@ -44,7 +44,8 @@ $(document).ready(function () {
             {
                 googleCalendarId: 'nl.be#holiday@group.v.calendar.google.com',
                 className: 'gcal-event',
-                color: '#00E676'
+                color: '#00E676',
+                editable: false
 
             },
             {

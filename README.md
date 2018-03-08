@@ -4,13 +4,14 @@ This project was intended for my graduation project at INTEC Brussels.
 
 **Features:**
 - Register/Login with security and field checks
-- A responsive and Material calendar with jQuery and AJAX for smooth control. Also comes with Google Calendar (API) events.
+- A responsive calendar with jQuery and AJAX for smooth control. Also comes with Google Calendar (API) events.
   Events can be added, edited, deleted and coloured!
 - Resize & drag 'n drop calendar events
 - To-Do's (tasks can also be seen in the calendar)
 - Assign tasks to other users
 - Approve and deny tasks from other users, denied tasks will be notified!
 - Contact list
+- Export contacts to Excel or PDF, and print
 - User list
 - User profiles and avatars
 - User Settings
