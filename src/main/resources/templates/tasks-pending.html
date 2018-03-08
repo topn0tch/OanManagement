@@ -48,7 +48,7 @@
                     <tr th:each="task : ${pendingTasks}">
                         <td><span th:text="${task.description}"></span> <span th:if="${#strings.toString(task.targetDate)} == ${today}" class="label label-danger">Today</span></td>
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>
-                        <td><a th:text="${task.creator.username}" th:href="@{/profile(id=${task.creator.id})}"></a></td>
+                        <td><a th:text="${task.creator.firstName} +' '+ ${task.creator.lastName}" th:href="@{/profile(id=${task.creator.id})}"></a></td>
                         <td><a th:href="@{/task-approve(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Approve task" class="btn btn-success btn-sm"><span class="fas fa-check-circle"></span></a></td>
                         <td>
                             <a th:href="@{/task-deny(id=${task.id})}" data-toggle="tooltip" data-placement="right" title="Deny task" class="btn btn-danger btn-sm"><span class="fas fa-ban"></span></a>

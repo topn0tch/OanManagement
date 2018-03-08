@@ -2,7 +2,6 @@ package com.oan.management.controller.calendar;
 
 import com.oan.management.model.Event;
 import com.oan.management.model.User;
-import com.oan.management.repository.UserRepository;
 import com.oan.management.service.calendar.EventService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +27,6 @@ public class CalendarController {
     @Autowired
     private EventService eventService;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @GetMapping("/calendar")
     public String calendar(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
@@ -43,10 +38,20 @@ public class CalendarController {
         return "calendar";
     }
 
-    @GetMapping("/calendar-addEvent")
+    /**
+     * This controller is used for adding new events
+     * @param authentication
+     * @param start
+     * @param end
+     * @param title
+     * @param description
+     * @param colour
+     * @return String
+     */
+    @GetMapping("/calendar-addevent")
     public String calendarAddEvent(Authentication authentication, @RequestParam String start, @RequestParam String end, @RequestParam String title, @RequestParam String description, @RequestParam String colour) {
         User userLogged = userService.findByUser(authentication.getName());
-        System.out.println("start: "+start+" end: "+end);
+
         if (userLogged != null) {
             if (title.length() > 0) {
                 eventService.save(new Event(title, description, start, end, userLogged, colour, colour, true));
@@ -59,19 +64,6 @@ public class CalendarController {
         }
     }
 
-    @PostMapping("/calendar")
-    public String addEvent(Model model, Event event, Authentication authentication, @RequestParam("start") String startdate, @RequestParam("end") String enddate) {
-        User userLogged = userService.findByUser(authentication.getName());
-        if (!event.getTitle().isEmpty()) {
-            eventService.save(new Event(event.getTitle(), event.getDescription(), event.getStart(), event.getEnd(), userLogged, event.getBackgroundColor(), event.getBackgroundColor(), true));
-        } else {
-            return "redirect:/calendar?notitle";
-        }
-        userLogged.setEventsCreated(userLogged.getEventsCreated()+1);
-        userRepository.save(userLogged);
-        return "redirect:/calendar";
-    }
-
     @GetMapping("/calendar-delete")
     public String deleteEvent(Authentication authentication, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
@@ -79,7 +71,15 @@ public class CalendarController {
         return "redirect:/calendar";
     }
 
-    // TODO: Can be removed
+    /**
+     * This controller is the simple controller for dragging and dropping events, only title and start/end are passed
+     * @param authentication
+     * @param title
+     * @param start
+     * @param end
+     * @param id
+     * @return String
+     */
     @GetMapping("/calendar-update")
     public String updateEvent(Authentication authentication, @RequestParam String title, @RequestParam String start, @RequestParam String end, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
@@ -87,7 +87,18 @@ public class CalendarController {
         return "redirect:/calendar";
     }
 
-    @GetMapping("/calendar-updateEvent")
+    /**
+     * This controller updates an event including it's colour, description etc
+     * @param authentication
+     * @param title
+     * @param start
+     * @param end
+     * @param id
+     * @param colour
+     * @param desc
+     * @return String
+     */
+    @GetMapping("/calendar-updateevent")
     public String updateEventNew(Authentication authentication, @RequestParam String title, @RequestParam String start, @RequestParam String end, @RequestParam Long id, @RequestParam String colour, @RequestParam String desc) {
         User userLogged = userService.findByUser(authentication.getName());
         Event event = eventService.findById(id);
@@ -96,13 +107,6 @@ public class CalendarController {
         } else {
             eventService.editEventAndColour(event, "Event", desc, colour,  colour);
         }
-        return "redirect:/calendar";
-    }
-
-    @PostMapping("calendar-update")
-    public String updateEventPost(Event event) {
-        Event updateEvent = eventService.findById(event.getId());
-        eventService.editEventAndColour(updateEvent, event.getTitle(), event.getDescription(), event.getBackgroundColor(), event.getBackgroundColor());
         return "redirect:/calendar";
     }
 }

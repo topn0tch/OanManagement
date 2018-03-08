@@ -45,7 +45,7 @@ public class RestWebController {
 
             if (userLogged.isTodoToCalendar()) {
                 for (Task task : tasks) {
-                    events.add(new Event(task.getDescription(), "To-Do: " + task.getDescription(), task.getTargetDate().toString(), task.getTargetDate().toString(), userLogged, CustomSettings.EVENT_TODO_COLOUR, CustomSettings.EVENT_TODO_COLOUR, false));
+                    events.add(new Event("To-do: "+task.getDescription(), "Task from: " + task.getCreator().getFirstName() + " " + task.getCreator().getLastName(), task.getTargetDate().toString(), task.getTargetDate().toString(), userLogged, CustomSettings.EVENT_TODO_COLOUR, CustomSettings.EVENT_TODO_COLOUR, false));
                 }
             }
             ObjectMapper mapper = new ObjectMapper();

@@ -72,6 +72,7 @@ $(document).ready(function () {
 
             $('#editEventModal #startEditTime').val(start);
             $('#editEventModal #endEditTime').val(end);
+            $('#editEventModal #editWhen').text(mywhen);
 
             $('#editEventModal').modal('toggle');
             $("#editEventModal").on('shown.bs.modal', function() {
@@ -97,7 +98,7 @@ $(document).ready(function () {
                     event.title="Event";
                 }
                 $.ajax({
-                    url: 'calendar-updateEvent',
+                    url: 'calendar-updateevent',
                     data: {title: title, start: start, end: end, id: eventID, colour: colour, desc: description},
                     type: "GET"
                 });
@@ -155,7 +156,7 @@ $(document).ready(function () {
         $('#theColor').val("");
 
         $.ajax({
-            url: 'calendar-addEvent',
+            url: 'calendar-addevent',
             data: data_row,
             type: "GET",
             cache: false,

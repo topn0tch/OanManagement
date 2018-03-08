@@ -23,126 +23,130 @@
                 <div id='calendar' style="height: auto; overflow: auto;"></div>
             </div>
 
-            <!-- Modal -->
-            <!--<form th:action="@{/calendar}" th:object="${event}" method="post">-->
-                <div id="createEventModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- New Event Modal-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Add Event</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="control-group">
-                                    <label class="control-label">Title: </label>
-                                    <div class="field desc">
-                                        <input id="theTitle" class="form-control" autocomplete="off" name="title" placeholder="Title" type="text" autofocus="true"/>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class="control-group">
-                                    <label class="control-label">Description: </label>
-                                    <div class="field desc">
-                                        <input id="theDescription" class="form-control" autocomplete="off" name="title" placeholder="Description" type="text"/>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class="control-group">
-                                    <label class="control-label">Colour: </label>
-                                    <div class="field desc">
-                                        <select name="color" class="form-control" id="theColor">
-                                            <option value="#5C6BC0">Choose</option>
-                                            <option style="color:#5C6BC0;" value="#0071c5">&#9724; Dark Blue</option>
-                                            <option style="color:#4DD0E1;" value="#4DD0E1">&#9724; Turquoise</option>
-                                            <option style="color:#4CAF50;" value="#4CAF50">&#9724; Green</option>
-                                            <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
-                                            <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-                                            <option style="color:#F44336;" value="#F44336">&#9724; Red</option>
-                                            <option style="color:#000;" value="#000">&#9724; Black</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <br/>
-                                <div class="control-group">
-                                    <label class="control-label" for="when">When: </label>
-                                    <div class="controls controls-row" id="when" style="margin-top:5px;">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                                <a class="btn btn-primary" id="submitButton">Save</a>
-                            </div>
+            <!-- Modal: New event -->
+            <div id="createEventModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Event</h4>
                         </div>
-
-                    </div>
-                </div>
-            <!--</form>-->
-
-
-            <!--EDIT EVENT MODAL-->
-            <!-- Modal -->
-            <!--<form th:action="@{/calendar-update}" th:object="${event}" method="post">-->
-                <div id="editEventModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Edit Event</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="control-group">
-                                    <label class="control-label" for="theTitle">Title: </label>
-                                    <div class="field desc">
-                                        <input class="form-control" autocomplete="off" th:value="${title}" id="modalEditTitle" autofocus="true" name="title" placeholder="Title" type="text"/>
-                                    </div>
+                        <div class="modal-body">
+                            <div class="control-group">
+                                <label class="control-label">Title: </label>
+                                <div class="field desc">
+                                    <input id="theTitle" class="form-control" autocomplete="off" name="title" placeholder="Title" type="text" autofocus="true"/>
                                 </div>
-                                <br/>
-                                <div class="control-group">
-                                    <label class="control-label" for="theDescription">Description: </label>
-                                    <div class="field desc">
-                                        <input class="form-control" autocomplete="off" th:value="${description}" id="modalEditDesc" name="desc" placeholder="Description" type="text"/>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class="control-group">
-                                    <label class="control-label" for="theColor">Colour: </label>
-                                    <div class="field desc">
-                                        <select th:value="${backgroundColor}" name="color" class="form-control" id="eventEditColour">
-                                            <option value="#5C6BC0">Choose</option>
-                                            <option style="color:#5C6BC0;" value="#0071c5">&#9724; Dark Blue</option>
-                                            <option style="color:#4DD0E1;" value="#4DD0E1">&#9724; Turquoise</option>
-                                            <option style="color:#4CAF50;" value="#4CAF50">&#9724; Green</option>
-                                            <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
-                                            <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-                                            <option style="color:#F44336;" value="#F44336">&#9724; Red</option>
-                                            <option style="color:#000;" value="#000">&#9724; Black</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <input th:value="${id}" type="hidden" id="eventEditID"/>
-                                <input th:value="${start}" type="hidden" id="startEditTime"/>
-                                <input th:value="${end}" type="hidden" id="endEditTime"/>
-                                <br/>
-
                             </div>
-                            <div class="modal-footer">
-                                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                                <a class="btn btn-danger pull-left" id="deleteButton">Delete</a>
-                                <a class="btn btn-primary" id="submitEditButton">Save</a>
+                            <br/>
+                            <div class="control-group">
+                                <label class="control-label">Description: </label>
+                                <div class="field desc">
+                                    <input id="theDescription" class="form-control" autocomplete="off" name="title" placeholder="Description" type="text"/>
+                                </div>
                             </div>
+                            <br/>
+                            <div class="control-group">
+                                <label class="control-label">Colour: </label>
+                                <div class="field desc">
+                                    <select name="color" class="form-control" id="theColor">
+                                        <option value="#5C6BC0">Choose</option>
+                                        <option style="color:#5C6BC0;" value="#0071c5">&#9724; Dark Blue</option>
+                                        <option style="color:#4DD0E1;" value="#4DD0E1">&#9724; Turquoise</option>
+                                        <option style="color:#4CAF50;" value="#4CAF50">&#9724; Green</option>
+                                        <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
+                                        <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
+                                        <option style="color:#F44336;" value="#F44336">&#9724; Red</option>
+                                        <option style="color:#000;" value="#000">&#9724; Black</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <div class="control-group">
+                                <label class="control-label" for="when">When: </label>
+                                <div class="controls controls-row" id="when" style="margin-top:5px;">
+                                </div>
+                            </div>
+
                         </div>
-
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                            <a class="btn btn-primary" id="submitButton">Save</a>
+                        </div>
                     </div>
+
                 </div>
-            <!--</form>-->
+            </div>
+
+
+            <!--Modal: Edit event-->
+            <div id="editEventModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Event</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="control-group">
+                                <label class="control-label" for="theTitle">Title: </label>
+                                <div class="field desc">
+                                    <input class="form-control" autocomplete="off" id="modalEditTitle" autofocus="true" name="title" placeholder="Title" type="text"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="control-group">
+                                <label class="control-label" for="theDescription">Description: </label>
+                                <div class="field desc">
+                                    <input class="form-control" autocomplete="off" id="modalEditDesc" name="desc" placeholder="Description" type="text"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="control-group">
+                                <label class="control-label" for="theColor">Colour: </label>
+                                <div class="field desc">
+                                    <select name="color" class="form-control" id="eventEditColour">
+                                        <option value="#5C6BC0">Choose</option>
+                                        <option style="color:#5C6BC0;" value="#0071c5">&#9724; Dark Blue</option>
+                                        <option style="color:#4DD0E1;" value="#4DD0E1">&#9724; Turquoise</option>
+                                        <option style="color:#4CAF50;" value="#4CAF50">&#9724; Green</option>
+                                        <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
+                                        <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
+                                        <option style="color:#F44336;" value="#F44336">&#9724; Red</option>
+                                        <option style="color:#000;" value="#000">&#9724; Black</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <div class="control-group">
+                                <label class="control-label" for="when">When: </label>
+                                <div class="controls controls-row" id="editWhen" style="margin-top:5px;">
+                                </div>
+                            </div>
+
+                            <div id="modalAuthor">
+
+                            </div>
+
+                            <input type="hidden" id="eventEditID"/>
+                            <input type="hidden" id="startEditTime"/>
+                            <input type="hidden" id="endEditTime"/>
+                            <br/>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                            <a class="btn btn-danger pull-left" id="deleteButton">Delete</a>
+                            <a class="btn btn-primary" id="submitEditButton">Save</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </body>
 </html>
