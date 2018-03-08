@@ -22,6 +22,7 @@ $(document).ready(function() {
             .row( $(this).parents('tr') )
             .remove()
             .draw();
+        deleteTaskNotification();
     } );
 
     $('#TodoList').on( 'click', '#deleteTask', function () {
@@ -32,6 +33,27 @@ $(document).ready(function() {
             data: {id: task_id},
             type: 'GET'
         })
-        $('#todoTableRow').remove();
+        $(this).closest('tr').remove();
+        deleteTaskNotification();
     } );
+    
+    function deleteTaskNotification() {
+        $.notify({
+            icon: 'fas fa-trash-alt marginright',
+            message: 'Task has been deleted'
+        },{
+            type: 'success',
+            newest_on_top: true,
+            allow_dismiss: true,
+            placement: {
+                from: "bottom",
+                align: "right"
+            },
+            delay: 2000,
+            animate: {
+                enter: 'animated bounceIn',
+                exit: 'animated bounceOut'
+            }
+        });
+    }
 } );
