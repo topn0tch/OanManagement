@@ -74,6 +74,9 @@ $(document).ready(function () {
             $('#editEventModal #endEditTime').val(end);
 
             $('#editEventModal').modal('toggle');
+            $("#editEventModal").on('shown.bs.modal', function() {
+                $('#modalEditTitle').focus();
+            });
 
             $('#submitEditButton').on('click', function (e) {
                 e.preventDefault();
@@ -111,6 +114,10 @@ $(document).ready(function () {
             $('#createEventModal #when').text(mywhen);
             $('#createEventModal').modal('toggle');
             $(".fc-highlight").css("background", "#2196F3");
+
+            $("#createEventModal").on('shown.bs.modal', function() {
+                $('#theTitle').focus();
+            });
         },
         eventDrop: function(event, delta){
             $.ajax({
