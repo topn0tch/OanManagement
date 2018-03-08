@@ -5,9 +5,13 @@ $(document).ready(function () {
         return check;
     };
 
+    var startDate;
+    var endDate;
+
     var calendar = $('#calendar').fullCalendar({
         defaultView: Cookies.get('fullCalendarCurrentView') || "month",
         defaultDate: Cookies.get('fullCalendarCurrentDate') || null,
+
         businessHours: {
             // days of week. an array of zero-based day of week integers (0=Sunday)
             dow: [ 1, 2, 3, 4, 5],
@@ -100,40 +104,13 @@ $(document).ready(function () {
         select: function(start, end, jsEvent) {
             var endtime = $.fullCalendar.moment(end).format('dddd, DD/MM/YYYY h:mm');
             var starttime = $.fullCalendar.moment(start).format('dddd, DD/MM/YYYY h:mm'); // dddd, Do MMMM YYYY h:mm
+            startDate = start;
+            endDate = end;
             var mywhen = starttime + ' - ' + endtime;
 
             $('#createEventModal #when').text(mywhen);
             $('#createEventModal').modal('toggle');
             $(".fc-highlight").css("background", "#2196F3");
-
-            $('#submitButton').on('click', function (e) {
-                $("#createEventModal").modal('hide');
-
-                var data_row = {
-                    'start': moment(start).format(),
-                    'end': moment(end).format(),
-                    'title': $('#theTitle').val(),
-                    'description': $('#theDescription').val(),
-                    'colour': $('#theColor').val()
-                }
-
-                console.log("Start date: "+moment(start).format());
-                console.log("End date: "+moment(end).format());
-
-                $('#theTitle').val("");
-                $('#theDescription').val("");
-                $('#theColor').val("");
-
-                $.ajax({
-                    url: 'calendar-addEvent',
-                    data: data_row,
-                    type: "GET",
-                    cache: false,
-                    success: function () {
-                        $('#calendar').fullCalendar('refetchEventSources', '/api/event/all' );
-                    }
-                });
-            });
         },
         eventDrop: function(event, delta){
             $.ajax({
@@ -155,6 +132,33 @@ $(document).ready(function () {
             right: 'month, agendaWeek, agendaDay, listWeek'
         }
     })
+    $('#submitButton').on('click', function (e) {
+        $("#createEventModal").modal('hide');
+
+        var data_row = {
+            'start': moment(startDate).format(),
+            'end': moment(endDate).format(),
+            'title': $('#theTitle').val(),
+            'description': $('#theDescription').val(),
+            'colour': $('#theColor').val()
+        }
+
+        $('#theTitle').val("");
+        $('#theDescription').val("");
+        $('#theColor').val("");
+
+        $.ajax({
+            url: 'calendar-addEvent',
+            data: data_row,
+            type: "GET",
+            cache: false,
+            success: function () {
+                $('#calendar').fullCalendar('refetchEventSources', '/api/event/all' );
+            }
+        });
+
+    });
+
     $('#deleteButton').on('click', function(e){
         // We don't want this to act as a link so cancel the link action
         e.preventDefault();

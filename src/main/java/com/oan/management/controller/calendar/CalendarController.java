@@ -46,6 +46,7 @@ public class CalendarController {
     @GetMapping("/calendar-addEvent")
     public String calendarAddEvent(Authentication authentication, @RequestParam String start, @RequestParam String end, @RequestParam String title, @RequestParam String description, @RequestParam String colour) {
         User userLogged = userService.findByUser(authentication.getName());
+        System.out.println("start: "+start+" end: "+end);
         if (userLogged != null) {
             if (title.length() > 0) {
                 eventService.save(new Event(title, description, start, end, userLogged, colour, colour, true));
