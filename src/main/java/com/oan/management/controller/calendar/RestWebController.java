@@ -39,17 +39,20 @@ public class RestWebController {
     public String getEvents(Authentication authentication) {
         String jsonMessage = null;
         try {
-            User userLogged = userService.findByUser(authentication.getName());
-            List<Event> events = eventService.findAllByUser(userLogged);
-            List<Task> tasks = taskService.findByUserAndCompletedIsFalseAndApprovedIsTrue(userLogged);
-
-            if (userLogged.isTodoToCalendar()) {
-                for (Task task : tasks) {
-                    events.add(new Event("To-do: "+task.getDescription(), "Task from: " + task.getCreator().getFirstName() + " " + task.getCreator().getLastName(), task.getTargetDate().toString(), task.getTargetDate().toString(), userLogged, CustomSettings.EVENT_TODO_COLOUR, CustomSettings.EVENT_TODO_COLOUR, false));
+            if (authentication != null) {
+                User userLogged = userService.findByUser(authentication.getName());
+                List<Event> events = eventService.findAllByUser(userLogged);
+                List<Task> tasks = taskService.findByUserAndCompletedIsFalseAndApprovedIsTrue(userLogged);
+                if (userLogged.isTodoToCalendar()) {
+                    for (Task task : tasks) {
+                        events.add(new Event("To-do: "+task.getDescription(), "Task from: " + task.getCreator().getFirstName() + " " + task.getCreator().getLastName(), task.getTargetDate().toString(), task.getTargetDate().toString(), userLogged, CustomSettings.EVENT_TODO_COLOUR, CustomSettings.EVENT_TODO_COLOUR, false));
+                    }
                 }
+                ObjectMapper mapper = new ObjectMapper();
+                jsonMessage = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(events);
+            } else {
+                return "You are not authenticated";
             }
-            ObjectMapper mapper = new ObjectMapper();
-            jsonMessage = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(events);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
