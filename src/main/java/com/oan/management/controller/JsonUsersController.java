@@ -1,8 +1,10 @@
 package com.oan.management.controller;
 
 import com.oan.management.model.User;
+import com.oan.management.service.message.MessageService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +19,10 @@ import java.util.List;
 @RestController
 public class JsonUsersController {
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping("/api/users")
     public List<User> getUsers() {
@@ -48,5 +53,15 @@ public class JsonUsersController {
     @GetMapping("/api/users/username/{username}")
     public User getUserByUsername(@PathVariable String username) {
         return userService.findByUser(username);
+    }
+
+    @GetMapping("/api/user/newmessages")
+    public int getUserNotifications(Authentication authentication) {
+        if (authentication != null) {
+            User userLogged = userService.findByUser(authentication.getName());
+            return messageService.findByReceiverAndOpenedIs(userLogged, 0).size();
+        } else {
+            return 0;
+        }
     }
 }

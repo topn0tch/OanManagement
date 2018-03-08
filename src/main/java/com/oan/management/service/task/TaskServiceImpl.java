@@ -148,7 +148,7 @@ public class TaskServiceImpl implements TaskService {
         notifyMessage.setOpened(0);
         notifyMessage.setSubject("Your assigned task to "+task.getUser().getUsername()+" has been denied.");
         notifyMessage.setMessageText("<p>Hello "+task.getCreator().getUsername() + ",</p><br/>You have assigned the following task to me: <blockquote>"+task.getDescription()+
-                "</blockquote><p>I hereby inform you that I have to deny your task.</p><small><em>This is an automated message and not written by the user self.</em></small>");
+                "</blockquote><p>I hereby wish to inform you that I have denied your task.</p><small><em>This is an automated message and not written by the user self.</em></small>");
         messageService.save(notifyMessage);
     }
 
