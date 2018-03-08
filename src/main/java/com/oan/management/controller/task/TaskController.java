@@ -101,7 +101,6 @@ public class TaskController {
         }
         taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted(), userLogged, true ));
         userService.incrementTasksCreated(userLogged);
-        userRepository.save(userLogged); // TODO This can be removed I guess
         return "redirect:/task-list";
     }
 
@@ -189,6 +188,9 @@ public class TaskController {
         if (taskService.findByUser(getLoggedUser(authentication)).contains(taskService.getOne(id))) {
             taskService.deleteTaskById(id);
             userService.decrementTasksCreated(userLogged);
+            if (taskService.findById(id).isCompleted()) {
+                userService.decrementTasksCompleted(userLogged);
+            }
             return "redirect:/task-list?deleted";
         } else {
             return "redirect:/task-list?notfound";
