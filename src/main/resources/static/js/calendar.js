@@ -141,6 +141,17 @@ $(document).ready(function () {
             right: 'month, agendaWeek, agendaDay, listWeek'
         }
     })
+
+    $(document).keyup(function (event) {
+        if (event.keyCode === 13)  {
+            if ($('#createEventModal').hasClass('in')) {
+                $("#submitButton").click();
+            } else if ($('#editEventModal').hasClass('in')) {
+                $("#submitEditButton").click();
+            }
+        }
+    })
+
     $('#submitButton').on('click', function (e) {
         $("#createEventModal").modal('hide');
 
@@ -152,21 +163,47 @@ $(document).ready(function () {
             'colour': $('#theColor').val()
         }
 
-        $('#theTitle').val("");
-        $('#theDescription').val("");
-        $('#theColor').val("");
+        if ($('#theTitle').val().trim().length > 0) {
+            $('#theTitle').val("");
+            $('#theDescription').val("");
+            $('#theColor').val("");
 
-        $.ajax({
-            url: 'calendar-addevent',
-            data: data_row,
-            type: "GET",
-            cache: false,
-            success: function () {
-                $('#calendar').fullCalendar('refetchEventSources', '/api/event/all' );
-            }
-        });
+            $.ajax({
+                url: 'calendar-addevent',
+                data: data_row,
+                type: "GET",
+                cache: false,
+                success: function () {
+                    $('#calendar').fullCalendar('refetchEventSources', '/api/event/all' );
+                }
+            });
+        } else {
+            emptyTitleNotification();
+        }
+
+
 
     });
+
+    function emptyTitleNotification() {
+        $.notify({
+            icon: 'fas fa-exclamation-triangle marginright',
+            message: 'Title cannot be empty'
+        },{
+            type: 'danger',
+            newest_on_top: true,
+            allow_dismiss: true,
+            placement: {
+                from: "bottom",
+                align: "right"
+            },
+            delay: 2000,
+            animate: {
+                enter: 'animated bounceIn',
+                exit: 'animated bounceOut'
+            }
+        });
+    }
 
     $('#deleteButton').on('click', function(e){
         // We don't want this to act as a link so cancel the link action

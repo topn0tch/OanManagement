@@ -3,6 +3,17 @@
 <head th:replace="fragments/header :: header"></head>
 <title th:text="'Budget - '+${paramBudget.title}"></title>
 
+<script>
+    $(document).ready(function () {
+        $(".progress-bar-success").animate({
+            width: $(".progress-bar-success").attr("value")+'%'
+        }, 500);
+        $(".progress-bar-danger").animate({
+            width: $(".progress-bar-danger").attr("value")+'%'
+        }, 1000);
+    })
+</script>
+
 <body>
     <div th:replace="fragments/navigation :: navigation"></div>
     <div class="container">
@@ -36,11 +47,11 @@
                             </div>
 
                             <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" th:style="'width:'+ ${incomesPercent} +'%'">
+                                <div id="test" class="progress-bar progress-bar-success" role="progressbar" th:value="${incomesPercent}" th:style="'width:0%'">
                                     Budget <span>&euro; <span th:text="${paramBudget.budgetAmount} - ${totalExpense}"></span></span>
                                 </div>
 
-                                <div class="progress-bar progress-bar-danger" role="progressbar" th:style="'width:'+ ${expensesPercent} +'%'">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" th:value="${expensesPercent}" th:style="'width: 0%'">
                                     Expenses <span>&euro; <span th:text="${totalExpense}"></span></span>
                                 </div>
                             </div>

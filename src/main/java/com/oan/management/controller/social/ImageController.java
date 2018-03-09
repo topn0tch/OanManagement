@@ -38,10 +38,11 @@ public class ImageController {
     }
 
     @PostMapping("/upload-avatar")
-    public String uploadAvatar(Model model, @RequestParam("file") MultipartFile file, Authentication authentication) {
+    public String uploadAvatar(Model model, @RequestParam("file") MultipartFile file, Authentication authentication, HttpServletRequest req) {
         User userLogged = userService.findByUser(authentication.getName());
         if (file.getContentType().contains("png")) {
             imageService.uploadImage(file, "/avatar", userLogged);
+            userService.updateUserAvatar(userLogged, req);
         } else {
             return "redirect:/upload-avatar?wrongtype";
         }
