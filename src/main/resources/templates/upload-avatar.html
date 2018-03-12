@@ -7,41 +7,57 @@
     <div th:replace="fragments/navigation :: navigation"></div>
     <div class="container">
 
-        <h1>Upload avatar </h1>
-        <form th:action="@{/upload-avatar}" method="post" enctype="multipart/form-data">
-            <div class="panel panel-login">
-                <div class="form-group">
-                    <div th:if="${param.wrongtype}">
-                        <div class="alert alert-danger alert-dismissable">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            You can only upload .png files with a maximum size of 1MB!
-                        </div>
-                    </div>
-                    <div th:if="${param.success}">
-                        <div class="alert alert-success alert-dismissable">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            Your avatar has been updated! It might take a little while before you see changes.
-                        </div>
-                    </div>
-                    <input id="fileinput" type="file" name="file"
-                           class="btn btn-default btn-file"
-                           required="required"/>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <input type="submit"
-                                   name="avatar-submit"
-                                   id="avatar-submit"
-                                   class="btn btn-info"
-                                   value="Upload avatar"/>
-                        </div>
-                    </div>
+        <h1><span class="far fa-image"></span> Upload avatar </h1>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-login">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation"><a href="/settings"><span class="glyphicon glyphicon-user"></span> Edit profile</a></li>
+                        <li role="presentation" class="active"><a href="/upload-avatar"><span class="far fa-image marginright"></span> Update avatar</a></li>
+                        <li role="presentation"><a href="/changepassword"><span class="glyphicon glyphicon-lock"></span> Change password</a></li>
+                        <li role="presentation"><a href="/appsettings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                        <li role="presentation"><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Recent activity</a></li>
+                        <li role="presentation"><a href="/report-bug"><span class="fa fa-bug"></span> Report bug</a></li>
+                    </ul>
                 </div>
             </div>
-        </form>
-        <a href="/profile" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+            <div class="col-md-8">
+                <form th:action="@{/upload-avatar}" method="post" enctype="multipart/form-data">
+                    <div class="panel panel-login">
+                        <div class="form-group">
+                            <div th:if="${param.wrongtype}">
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    You can only upload .png files with a maximum size of 1MB!
+                                </div>
+                            </div>
+                            <div th:if="${param.success}">
+                                <div class="alert alert-success alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    Your avatar has been updated! It might take a little while before you see changes.
+                                </div>
+                            </div>
+                            <input id="fileinput" type="file" name="file"
+                                   class="btn btn-default btn-file"
+                                   required="required"/>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="submit"
+                                           name="avatar-submit"
+                                           id="avatar-submit"
+                                           class="btn btn-info"
+                                           value="Upload avatar"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--<a href="/profile" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>-->
     </div>
 </body>
 </html>

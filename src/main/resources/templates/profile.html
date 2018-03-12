@@ -15,11 +15,11 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="panel panel-login">
-                        <div class="profile-pic" style="padding-left: 20px">
-                            <img class="img-rounded" th:src="@{${avatar}}" width="180" height="200"/>
-                            <div th:if="${paramUser.id} == ${loggedUser.id}" class="edit"><a href="/upload-avatar"><i class="glyphicon glyphicon-pencil"></i></a></div>
-                        </div>
-                        <div style="padding-left: 16px">
+                        <!--Profile pic-->
+                        <img class="img-rounded img-responsive center-block" th:src="@{${avatar}}" width="180" height="200"/>
+                        <div th:if="${paramUser.id} == ${loggedUser.id}" class="edit"><a href="/upload-avatar"><i class="glyphicon glyphicon-pencil"></i></a></div>
+                        <!-- User info under pic-->
+                        <div class="text-center">
                             <h2><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h2>
                             <p>@<span th:text="${paramUser.username}"></span></p>
                             <p th:each="role: ${paramUser.roles}">
@@ -29,22 +29,19 @@
                             </p>
                             <p><str class="someSpace">User ID: </str><span th:text="${paramUser.id}"></span></p>
                             <!--<p><i class="glyphicon glyphicon-envelope"> </i> <a th:href = "'mailto:' + ${paramUser.email}" th:text="${paramUser.email}"></a></p>-->
-
-                            <!-- actions for other users-->
-                            <div th:if="${paramUser.id} != ${loggedUser.id}" class="profileActions">
-                                <hr/>
-                                <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>
-                                <a th:href="@{/task-assign(id=${paramUser.id})}" class="btn btn-success btn-sm">
-                                    <span class="fas fa-calendar-check"></span> Assign task
-                                </a>
-                            </div>
-
-                            <!--If user is visiting his profile, other options-->
-                            <div th:if="${paramUser.id} == ${loggedUser.id}" class="profileActions">
-                                <hr/>
-                                <a th:href="@{/settings}" class="btn btn-default btn-sm center-block"><span class="glyphicon glyphicon-cog"></span>Edit Profile</a>
-                            </div>
-
+                        </div>
+                        <!-- actions for other users-->
+                        <div th:if="${paramUser.id} != ${loggedUser.id}" class="profileActions">
+                            <hr/>
+                            <a th:href="@{/message-to(id=${paramUser.id})}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-envelope"></span>Message</a>
+                            <a th:href="@{/task-assign(id=${paramUser.id})}" class="btn btn-success btn-sm">
+                                <span class="fas fa-calendar-check"></span> Assign task
+                            </a>
+                        </div>
+                        <!--If user is visiting his profile, other options-->
+                        <div th:if="${paramUser.id} == ${loggedUser.id}" class="profileActions">
+                            <hr/>
+                            <a th:href="@{/settings}" class="btn btn-default btn-sm center-block"><span class="glyphicon glyphicon-cog"></span>Edit Profile</a>
                         </div>
                     </div>
                 </div>

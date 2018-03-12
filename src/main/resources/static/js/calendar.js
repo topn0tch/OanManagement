@@ -49,7 +49,6 @@ $(document).ready(function () {
                 className: 'gcal-event',
                 color: '#00E676',
                 editable: false
-
             }
 
         ],
@@ -60,6 +59,9 @@ $(document).ready(function () {
         },
 
         eventClick:  function(event, jsEvent, view) {
+            if (event.url) {
+                return false;
+            }
             endtime = $.fullCalendar.moment(event.end).format('h:mm');
             starttime = $.fullCalendar.moment(event.start).format('dddd, MMMM Do YYYY, h:mm');
 

@@ -2,10 +2,7 @@ package com.oan.management.controller;
 
 import com.oan.management.model.Rank;
 import com.oan.management.model.User;
-import com.oan.management.service.image.ImageService;
-import com.oan.management.service.message.MessageService;
 import com.oan.management.service.rank.RankService;
-import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import com.oan.management.utility.CustomTimeMessage;
 import com.oan.management.utility.RandomQuote;
@@ -25,15 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 public class MainController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private TaskService taskService;
-
-    @Autowired
-    private MessageService messageService;
-
-    @Autowired
-    private ImageService imageService;
 
     @Autowired
     private RankService rankService;

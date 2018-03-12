@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-image:url("https://i.imgur.com/IjN2obf.png");
+    background-image:url("/img/background/bg.png");
 }
 
 h1 {
@@ -10,7 +10,10 @@ h1 {
 .profile-pic {
     position: relative;
     display: inline-block;
+    object-fit: scale-down;
 }
+
+
 
 @media only screen and (max-width: 500px) {
     .mobilecalendar {
@@ -80,6 +83,10 @@ th.fc-day-header.fc-sat, th.fc-day-header.fc-sun{
     word-wrap: break-word;
 }
 
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
 .error-message {
     color: #a94442;
 }
@@ -93,16 +100,8 @@ th.fc-day-header.fc-sat, th.fc-day-header.fc-sun{
 }
 
 #calendar {
-    /* 		float: right; */
     margin: 0 auto;
     width: auto;
-    /*background-color: #FFFFFF;
-    border-radius: 6px;
-    box-shadow: 0 1px 2px #C3C3C3;
-    -webkit-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
-    -moz-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
-    box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
-    padding: 20px;*/
 }
 
 .marginup {
@@ -271,7 +270,6 @@ th.fc-day-header.fc-sat, th.fc-day-header.fc-sun{
     width: 16px;
     height: 16px;
     margin: 2px;
-
     background: #FFF;
     border: 2px solid #EF5350;
     color: #666;
