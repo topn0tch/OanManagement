@@ -17,7 +17,7 @@ spring:
 
 # = JPA configurations
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
     database-platform: MYSQL
@@ -28,6 +28,6 @@ spring:
 logging:
   level:
     root: WARN
-    com.oan: DEBUG
-    org.springframework.web: DEBUG
+    com.oan: INFO
+    org.springframework.web: INFO
     org.springframework.security: INFO

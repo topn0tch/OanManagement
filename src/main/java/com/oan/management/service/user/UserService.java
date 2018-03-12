@@ -15,7 +15,7 @@ public interface UserService extends UserDetailsService {
     List<User> findAll();
     void addBugReport(User userLogged);
     User editByUser(User user, String firstName, String lastName, String country, int age, String facebook, String skype,
-                    String github, String email, String username);
+                    String github, String twitter, String email, String username);
     void incrementMessagesReceivedStats(User user);
     void incrementMessagesSentStats(User user);
     User setSocialSettings(User user, String facebook, String twitter, String skype, String github);
@@ -31,4 +31,9 @@ public interface UserService extends UserDetailsService {
 
     void incrementTasksCompleted(User user);
     void decrementTasksCompleted(User user);
+
+    User setMotivationalTaskMessage(User user, boolean value);
+    User setSmallCalendar(User user, boolean value);
+    User setTodoToCalendar(User user, boolean value);
+    User setShowEmail(User user, boolean value);
 }

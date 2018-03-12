@@ -1,7 +1,6 @@
 package com.oan.management.controller.settings;
 
 import com.oan.management.model.User;
-import com.oan.management.repository.UserRepository;
 import com.oan.management.service.message.MessageService;
 import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
@@ -28,9 +27,6 @@ public class AppSettingsController {
     UserService userService;
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     TaskService taskService;
 
     @Autowired
@@ -52,37 +48,28 @@ public class AppSettingsController {
                                @RequestParam(value = "smallCalendar", required = false) String smallCalendar,
                                @RequestParam(value = "todoToCalendar", required = false) String todoToCalendar,
                                @RequestParam(value = "showEmail", required = false) String showEmail) {
-        System.out.println(checkbox);
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             if (checkbox == null) {
-                userLogged.setMotivationalTaskMessage(false);
-                userRepository.save(userLogged);
+                userService.setMotivationalTaskMessage(userLogged, false);
             } else {
-                userLogged.setMotivationalTaskMessage(true);
-                userRepository.save(userLogged);
+                userService.setMotivationalTaskMessage(userLogged, true);
             }
             if (smallCalendar == null) {
-                userLogged.setSmallCalendar(false);
-                userRepository.save(userLogged);
+                userService.setSmallCalendar(userLogged, false);
             } else {
-                userLogged.setSmallCalendar(true);
-                userRepository.save(userLogged);
+                userService.setSmallCalendar(userLogged, true);
             }
             if (todoToCalendar == null) {
-                userLogged.setTodoToCalendar(false);
-                userRepository.save(userLogged);
+                userService.setTodoToCalendar(userLogged, false);
             } else {
-                userLogged.setTodoToCalendar(true);
-                userRepository.save(userLogged);
+                userService.setTodoToCalendar(userLogged, true);
             }
             if (showEmail == null) {
-                userLogged.setShowEmail(false);
-                userRepository.save(userLogged);
+                userService.setShowEmail(userLogged, false);
             } else {
-                userLogged.setShowEmail(true);
-                userRepository.save(userLogged);
+                userService.setShowEmail(userLogged, true);
             }
         }
         return "redirect:/appsettings?success";

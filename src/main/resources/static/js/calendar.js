@@ -42,15 +42,16 @@ $(document).ready(function () {
         googleCalendarApiKey: 'AIzaSyB3TNtPD1CNpwIZW2W2Yqx2LRXBkskgIKs',
         eventSources: [
             {
+                url : '/api/event/all'
+            },
+            {
                 googleCalendarId: 'nl.be#holiday@group.v.calendar.google.com',
                 className: 'gcal-event',
                 color: '#00E676',
                 editable: false
 
-            },
-            {
-                url : '/api/event/all',
             }
+
         ],
 
         viewRender: function(view) {

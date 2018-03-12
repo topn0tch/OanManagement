@@ -3,7 +3,6 @@ package com.oan.management.controller.contact;
 import com.oan.management.model.Contact;
 import com.oan.management.model.User;
 import com.oan.management.service.contact.ContactService;
-import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,9 +29,6 @@ public class ContactController {
 
     @Autowired
     private ContactService contactService;
-
-    @Autowired
-    private TaskService taskService;
 
     public User getLoggedUser(Authentication authentication) {
         return userService.findByUser(authentication.getName());

@@ -1,7 +1,6 @@
 package com.oan.management.controller.authentication;
 
 import com.oan.management.model.User;
-import com.oan.management.repository.UserRepository;
 import com.oan.management.service.user.UserService;
 import com.oan.management.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +17,13 @@ import javax.validation.Valid;
 /**
  * @author Oan Stultjens
  * Controller for the registration and validation of the {@link UserRegistrationDto}
+ * When an user is registering, the form will pass the data to {@link UserRegistrationDto}, which
+ * afterwards will be saved to the database
  */
 
 @Controller
 @RequestMapping("/registration")
 public class UserRegistrationController {
-
-    @Autowired
-    UserRepository userRepository;
-
     @Autowired
     private UserService userService;
 

@@ -1,7 +1,6 @@
 package com.oan.management.controller.administration;
 
 import com.oan.management.model.User;
-import com.oan.management.repository.UserRepository;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,9 +22,6 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @GetMapping("/admin")
     public String getAdminPanel(Model model, Authentication authentication, HttpServletRequest req) {
@@ -67,8 +63,7 @@ public class AdminController {
     public String editUser(Model model, User user, @PathVariable Long id) {
         User paramUser = userService.findById(id);
         userService.editByUser(paramUser, user.getFirstName(), user.getLastName(), user.getCountry(), user.getAge(),
-                user.getFacebook(), user.getSkype(), user.getGithub(), user.getEmail(), user.getUsername());
-        userRepository.save(paramUser);
+                user.getFacebook(), user.getSkype(), user.getGithub(), user.getTwitter(), user.getEmail(), user.getUsername());
         return "redirect:/admin/manageusers/"+paramUser.getId();
     }
 }

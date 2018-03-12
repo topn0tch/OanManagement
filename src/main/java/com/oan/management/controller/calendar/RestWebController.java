@@ -1,7 +1,7 @@
 package com.oan.management.controller.calendar;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.oan.management.config.CustomSettings;
+import com.oan.management.config.CustomAppSettings;
 import com.oan.management.model.Event;
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
@@ -45,7 +45,7 @@ public class RestWebController {
                 List<Task> tasks = taskService.findByUserAndCompletedIsFalseAndApprovedIsTrue(userLogged);
                 if (userLogged.isTodoToCalendar()) {
                     for (Task task : tasks) {
-                        events.add(new Event("To-do: "+task.getDescription(), "Task from: " + task.getCreator().getFirstName() + " " + task.getCreator().getLastName(), task.getTargetDate().toString(), task.getTargetDate().toString(), userLogged, CustomSettings.EVENT_TODO_COLOUR, CustomSettings.EVENT_TODO_COLOUR, false));
+                        events.add(new Event("To-do: "+task.getDescription(), "Task from: " + task.getCreator().getFirstName() + " " + task.getCreator().getLastName(), task.getTargetDate().toString(), task.getTargetDate().toString(), userLogged, CustomAppSettings.EVENT_TODO_COLOUR, CustomAppSettings.EVENT_TODO_COLOUR, false));
                     }
                 }
                 ObjectMapper mapper = new ObjectMapper();

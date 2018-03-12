@@ -1,6 +1,6 @@
 package com.oan.management.controller.budget;
 
-import com.oan.management.config.CustomSettings;
+import com.oan.management.config.CustomAppSettings;
 import com.oan.management.model.Budget;
 import com.oan.management.model.Expense;
 import com.oan.management.model.Income;
@@ -167,7 +167,7 @@ public class BudgetController {
     @PostMapping("income-edit")
     public String editIncome(Authentication authentication, Income income, @RequestParam Long id) {
         if (income.getDescription().length() > 0 && income.getDescription().length() <= 50) {
-            if (income.getAmount() > 0 && income.getAmount() < CustomSettings.MAXIMUM_INCOME_AND_EXPENSE_AMOUNT) {
+            if (income.getAmount() > 0 && income.getAmount() < CustomAppSettings.MAXIMUM_INCOME_AND_EXPENSE_AMOUNT) {
                 incomeService.editById(id, income.getDescription(), income.getAmount());
                 return "redirect:/budget?id="+incomeService.findById(id).getBudget().getId();
             } else {
@@ -201,7 +201,7 @@ public class BudgetController {
     @PostMapping("expense-edit")
     public String editExpense(Authentication authentication, Expense expense, @RequestParam Long id) {
         if (expense.getDescription().length() > 0 && expense.getDescription().length() <= 50) {
-            if (expense.getAmount() > 0 && expense.getAmount() < CustomSettings.MAXIMUM_INCOME_AND_EXPENSE_AMOUNT) {
+            if (expense.getAmount() > 0 && expense.getAmount() < CustomAppSettings.MAXIMUM_INCOME_AND_EXPENSE_AMOUNT) {
                 expenseService.editById(id, expense.getDescription(), expense.getAmount());
                 return "redirect:/budget?id="+expenseService.findById(id).getBudget().getId();
             } else {
@@ -231,7 +231,6 @@ public class BudgetController {
     @PostMapping("/budget")
     public String addIncome(@ModelAttribute("paramBudget") Budget paramBudget, @RequestParam("action") String action, Model model, Authentication authentication, Income income, Expense expense) {
         User userLogged = userService.findByUser(authentication.getName());
-        System.out.println("mother:"+action);
 
         if (action.contains("income")) {
             if (income.getAmount() > 0) {

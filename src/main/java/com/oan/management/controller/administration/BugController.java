@@ -1,6 +1,6 @@
 package com.oan.management.controller.administration;
 
-import com.oan.management.config.CustomSettings;
+import com.oan.management.config.CustomAppSettings;
 import com.oan.management.model.Bug;
 import com.oan.management.model.User;
 import com.oan.management.service.bug.BugService;
@@ -54,7 +54,7 @@ public class BugController {
     public String reportBugSubmit(Authentication authentication, Bug bug, Model model) {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged.getRoles().contains("ROLE_USER")) {
-            if (userLogged.getBugsReported() < CustomSettings.MAXIMUM_BUG_REPORTS) {
+            if (userLogged.getBugsReported() < CustomAppSettings.MAXIMUM_BUG_REPORTS) {
                 bugService.save(new Bug(userLogged, bug.getDescription(), new Date(Calendar.getInstance().getTime().getTime())));
                 userService.addBugReport(userLogged);
                 return "redirect:/report-bug?reported";

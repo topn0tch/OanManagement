@@ -5,7 +5,7 @@ package com.oan.management.config;
  * @author Oan Stultjens
  * These settings can be changed to your own wishes
  */
-public class CustomSettings {
+public class CustomAppSettings {
     // Maximum amount of bug reports for a regular user
     public static final int MAXIMUM_BUG_REPORTS = 10;
     // Maximum value of a income/expense

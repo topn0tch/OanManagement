@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User editByUser(User user, String firstName, String lastName, String country, int age, String facebook, String skype, String github, String email, String username) {
+    public User editByUser(User user, String firstName, String lastName, String country, int age, String facebook, String skype, String github, String twitter, String email, String username) {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setCountry(country);
@@ -101,6 +101,7 @@ public class UserServiceImpl implements UserService {
         user.setFacebook(facebook);
         user.setSkype(skype);
         user.setGithub(github);
+        user.setTwitter(twitter);
         user.setEmail(email);
         user.setUsername(username);
         return userRepository.save(user);
@@ -189,6 +190,30 @@ public class UserServiceImpl implements UserService {
     public void decrementTasksCompleted(User user) {
         user.setTasksCompleted(user.getTasksCompleted()-1);
         userRepository.save(user);
+    }
+
+    @Override
+    public User setMotivationalTaskMessage(User user, boolean value) {
+        user.setMotivationalTaskMessage(value);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User setSmallCalendar(User user, boolean value) {
+        user.setSmallCalendar(value);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User setTodoToCalendar(User user, boolean value) {
+        user.setTodoToCalendar(value);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User setShowEmail(User user, boolean value) {
+        user.setShowEmail(value);
+        return userRepository.save(user);
     }
 
     /**
