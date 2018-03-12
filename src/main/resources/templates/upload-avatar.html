@@ -37,9 +37,22 @@
                                     Your avatar has been updated! It might take a little while before you see changes.
                                 </div>
                             </div>
-                            <input id="fileinput" type="file" name="file"
-                                   class="btn btn-default btn-file"
-                                   required="required"/>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img th:if="${avatar} != null" class="img-rounded img-responsive" th:src="@{${avatar}}" width="180" height="200"/>
+                                </div>
+                                <br/>
+                                <p>Select a .png file: </p>
+                                <div class="col-md-8">
+                                    <input id="fileinput" type="file" name="file"
+                                           class="btn btn-default btn-file"
+                                           required="required"/>
+                                </div>
+                            </div>
+
+
+
                         </div>
 
                         <div class="form-group">
