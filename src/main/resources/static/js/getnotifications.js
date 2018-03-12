@@ -22,10 +22,12 @@ $(document).ready(function () {
                 if (messagesCount < newMessagesCount) {
                     messagesCount = newMessagesCount;
                     newMessageNotification()
-                    if ($('messagesCountInDiv').length == 0) {
-                        $('#notification').append("<li><a href='/messages' data-toggle='tooltip' data-placement='bottom' title='1 unread message'><span class='fa fa-envelope margindown fa-lg faa-horizontal animated'></span><span class='badge'>1</span> </li>");
+                    if (isNaN(parseInt($('#newMessageCountNavigation').text())) ) {
+                        $('#notification').append("<li><a href='/messages' data-toggle='tooltip' data-placement='bottom' th:title='1 unread message'><span class='fa fa-envelope margindown fa-lg faa-horizontal animated'></span><span id='newMessageCountNavigation' class='badge'>1</span> </li>");
+                        $('#hasNoMessages').html("You have <strong>new</strong> messages!");
+                    } else {
+                        $('#newMessageCountNavigation').text(parseInt($('#newMessageCountNavigation').text())+1);
                     }
-                    $('#newMessageCountNavigation').text(parseInt($('#newMessageCountNavigation').text())+1);
                     $('#newMessageCountWidget').text(parseInt($('#newMessageCountWidget').text())+1);
                 }
             }

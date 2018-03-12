@@ -68,8 +68,10 @@
                                 th:text="${session.pendingTasksCount}" class="badge" style="margin-top: 1px"></span></a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
-                        <a id="messagesCountInDiv" th:if="${session.unreadMessages} > 0" href="/messages" data-toggle="tooltip" data-placement="bottom" th:title="${session.unreadMessages}+' unread message(s)'"><span th:if="${session.unreadMessages} > 0" class="fa fa-envelope margindown fa-lg faa-horizontal animated"> </span><span
-                                th:text="${session.unreadMessages}" id="newMessageCountNavigation" class="badge" style="margin-top: 1px"></span></a>
+                        <a th:if="${session.unreadMessages} > 0" href="/messages" data-toggle="tooltip" data-placement="bottom" th:title="${session.unreadMessages}+' unread message(s)'">
+                            <span th:if="${session.unreadMessages} > 0" class="fa fa-envelope margindown fa-lg faa-horizontal animated"> </span>
+                            <span th:text="${session.unreadMessages}" id="newMessageCountNavigation" class="badge" style="margin-top: 1px"></span>
+                        </a>
                     </li>
                 </ul>
         </div>

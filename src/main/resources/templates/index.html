@@ -49,8 +49,8 @@
                 <div class="panel panel-login">
                     <h3>Messages</h3>
                     <p th:if="${session.unreadMessages} > 0">You have <strong><span id="newMessageCountWidget" th:text="${session.unreadMessages}"></span></strong> unread message(s)</p>
-                    <p th:if="${session.unreadMessages == 0}">You have no unread messages</p>
-                    <div th:if="${session.lastMessage}">
+                    <p id="hasNoMessages" th:if="${session.unreadMessages == 0}">You have no unread messages</p>
+                    <div th:if="${session.lastMessage} and ${session.unreadMessages} != 0">
                         <small style="color: #666666">Last unread message from <span th:text="${session.lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(session.lastMessage.date, 'dd/MM/yyyy')}"></span></small>
                     </div>
                     <!--<span th:if="${lastMesssage}">Last message from <span th:text="${lastMessage.sender.firstName}"></span> on <span th:text="${#dates.format(lastMessage.date, 'dd/MM/yyyy')}"></span></span>-->
