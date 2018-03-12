@@ -29,5 +29,5 @@ logging:
   level:
     root: WARN
     com.oan: INFO
-    org.springframework.web: INFO
+    org.springframework.web: DEBUG
     org.springframework.security: INFO

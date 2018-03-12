@@ -21,6 +21,10 @@
                             <li role="presentation"><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Recent Activity</a></li>
                         </ul>
                     </div>
+                    <div class="panel panel-login">
+                        <img class="img-rounded img-responsive center-block profile-pic" th:src="@{${avatar}}"/>
+                        <a th:href="@{'/admin/manageusers/'+${paramUser.id}+'/delete-avatar'}" class="btn btn-danger center-block" style="margin-top: 13px">Remove image</a>
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <form th:action="@{/admin/manageusers/}+${paramUser.id}" method="post" th:object="${paramUser}">
@@ -119,19 +123,19 @@
                                 <br/>
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <span class="fab fa-facebook-square marginright"></span> Facebook:
+                                        <span class="fab fa-github marginright"></span> GitHub:
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="form-control" th:value="${paramUser.facebook}" th:field="*{facebook}"></input>
+                                        <input class="form-control" th:value="${paramUser.github}" th:field="*{github}"/>
                                     </div>
                                 </div>
                                 <br/>
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <span class="fab fa-github marginright"></span> GitHub:
+                                        <span class="fab fa-facebook-square marginright"></span> Facebook:
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="form-control" th:value="${paramUser.github}" th:field="*{github}"></input>
+                                        <input class="form-control" th:value="${paramUser.facebook}" th:field="*{facebook}"></input>
                                     </div>
                                 </div>
                             </div>
@@ -155,8 +159,6 @@
                                        value="Update Settings"/>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>

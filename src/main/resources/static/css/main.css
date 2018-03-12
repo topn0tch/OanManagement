@@ -7,22 +7,25 @@ h1 {
     color: #78ab46;
 }
 
-.profile-pic {
-    position: relative;
-    display: inline-block;
-    object-fit: scale-down;
-}
-
-
-
 @media only screen and (max-width: 500px) {
     .mobilecalendar {
         height: 500px;
     }
 }
 
-.profile-pic:hover .edit {
+.profile-pic {
+    max-height: 200px;
+}
+
+.profile-pic-box:hover .edit {
     display: block;
+    left: 200px;
+    top: 44px;
+}
+
+.profile-pic-box:hover img {
+    color: #000000;
+    background:rgba(0,0,0,0.5) center no-repeat;
 }
 
 .edit {

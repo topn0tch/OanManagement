@@ -43,10 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/settings","/appsettings","/changepassword",
                             "/messages", "/message", "/message-new","/message-to",
                             "/report-bug").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_TESTER")
-                    .antMatchers("/admin",
-                            "/manageusers", "/edituser", "/bugreports").hasAuthority("ROLE_ADMIN")
-
-//                    .antMatchers("/registration**").not().authenticated().anyRequest().permitAll()
+                    .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .and()
                     .formLogin()
                         .loginPage("/login")

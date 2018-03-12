@@ -15,4 +15,5 @@ public interface ImageService {
     Image findById(Long id);
     Image findByTitle(String title);
     Image getUserImage(User user);
+    Image removeUserImage(User user);
 }

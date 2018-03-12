@@ -59,6 +59,18 @@ public class ImageServiceImpl implements ImageService {
         }
     }
 
+    @Override
+    public Image removeUserImage(User user) {
+        Image image = imageRepository.findByTitle(user.getId()+".png");
+        if (image != null) {
+            image.setUrl("/avatar/0.png");
+            return imageRepository.save(image);
+        } else {
+            return imageRepository.save(new Image("0.png", "/avatar/0.png", user));
+        }
+
+    }
+
     /**
      * Uploads a new user avatar
      * @param file {@link MultipartFile}
@@ -88,6 +100,8 @@ public class ImageServiceImpl implements ImageService {
                     image = new Image(createdFileName, completeUrl, user);
                 } else {
                     image = findByTitle(user.getId()+".png");
+                    // When image is set to default, change back
+                    image.setUrl("/avatar/"+user.getId()+".png");
                 }
             } catch (IOException e) {
                 e.printStackTrace();

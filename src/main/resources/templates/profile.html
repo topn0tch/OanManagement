@@ -16,8 +16,10 @@
                 <div class="col-md-3">
                     <div class="panel panel-login">
                         <!--Profile pic-->
-                        <img class="img-rounded img-responsive center-block" th:src="@{${avatar}}" width="180" height="200"/>
-                        <div th:if="${paramUser.id} == ${loggedUser.id}" class="edit"><a href="/upload-avatar"><i class="glyphicon glyphicon-pencil"></i></a></div>
+                        <div class="profile-pic-box">
+                            <img class="img-rounded img-responsive center-block profile-pic" th:src="@{${avatar}}"/>
+                            <div th:if="${paramUser.id} == ${loggedUser.id}" class="edit"><a href="/upload-avatar"><i class="fas fa-pencil-alt fa-lg faa-shake animated-hover"></i></a></div>
+                        </div>
                         <!-- User info under pic-->
                         <div class="text-center">
                             <h2><span th:text="${paramUser.firstName} + ' ' +  ${paramUser.lastName}"></span></h2>
