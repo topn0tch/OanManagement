@@ -195,10 +195,13 @@ th.fc-day-header.fc-sat, th.fc-day-header.fc-sun{
 
 .quote-box{
     overflow: hidden;
+    border: 1px solid transparent;
     border-radius: 12px;
     background-color: #4ADFCC;
     color:white;
-    box-shadow: 2px 2px 2px 2px #E0E0E0;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 
 }
 

@@ -36,7 +36,7 @@
                 <tbody>
                     <tr th:each="user : ${users}">
                         <td th:text="${user.id}"></td>
-                        <td><a th:href="@{/profile(id=${user.id})}" th:text="${user.username}"></a></td>
+                        <td><img class="img-circle marginright" width="32" height="32" th:src="@{/api/avatar/__${user.id}__}"/> <a th:href="@{/profile(id=${user.id})}" th:text="${user.username}"></a></td>
                         <td th:each="role : ${user.roles}">
                             <span class="label label-success" th:if="${role.name}=='ROLE_ADMIN'">Administrator</span>
                             <span class="label label-default" th:if="${role.name}=='ROLE_USER'">User</span>
