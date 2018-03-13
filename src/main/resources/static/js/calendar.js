@@ -138,6 +138,19 @@ $(document).ready(function () {
                 type: "GET"
             });
         },
+        eventRender: function(event, element){
+            element.popover({
+                animation:true,
+                delay: 800,
+                content: event.description,
+                trigger: 'hover'
+            });
+            /*element.tooltip({
+                placement: "right",
+                title: event.description,
+                delay: 500,
+            })*/
+        },
         header: {
             left: 'prev, next today',
             center: 'title',
