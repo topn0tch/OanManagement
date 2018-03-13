@@ -38,6 +38,7 @@ load animations
 - https://summernote.org/ - WYSIWYG Editor
 - http://l-lin.github.io/font-awesome-animation/ - Font Awesome Animations
 - https://github.com/mouse0270/bootstrap-notify - Notifications for Bootstrap
+- http://easyautocomplete.com/ - jQuery autocompletion
 
 **Graphics**
 - https://www.flaticon.com/authors/dimitry-miroliubov for the user ranks GFX
