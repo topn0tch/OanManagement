@@ -3,6 +3,10 @@
 <head th:replace="fragments/header :: header"></head>
 <title>New Message</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/easy-autocomplete/1.3.5/jquery.easy-autocomplete.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/easy-autocomplete/1.3.5/easy-autocomplete.css"/>
+<script src="js/message_new-autocompletion.js"></script>
+
 <body>
     <div th:replace="fragments/navigation :: navigation"></div>
 
@@ -35,8 +39,8 @@
                             Subject and message text cannot be empty
                         </div>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">To: </span>
+                    <div class="easy-autocomplete">
+                        <label for="reciepent" class="control-label col-md-3">To: </label>
                         <input id="reciepent" type="text" autocomplete="off" th:field="*{receiver.username}"
                                class="form-control"
                                autofocus="autofocus"
@@ -44,6 +48,8 @@
                                required="required"
                                placeholder="Recepient"/>
                     </div>
+                    <!--<strong>To:</strong>
+                    <input id="reciepent"/>-->
                 </div>
                 <div class="form-group">
                     <label for="subject" class="control-label col-md-3">Subject: </label>
