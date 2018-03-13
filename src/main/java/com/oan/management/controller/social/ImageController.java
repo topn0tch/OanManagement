@@ -33,8 +33,6 @@ public class ImageController {
         User userLogged = userService.findByUser(authentication.getName());
         model.addAttribute("loggedUser", userLogged);
         model.addAttribute("image", new Image());
-        Image avatar = imageService.getUserImage(userLogged);
-        model.addAttribute("avatar", "/img/"+avatar.getUrl());
         userService.updateUserAttributes(userLogged, req);
         return "/upload-avatar";
     }
@@ -44,7 +42,6 @@ public class ImageController {
         User userLogged = userService.findByUser(authentication.getName());
         if (file.getContentType().contains("png")) {
             imageService.uploadImage(file, "/avatar", userLogged);
-            userService.updateUserAvatar(userLogged, req);
         } else {
             return "redirect:/upload-avatar?wrongtype";
         }

@@ -26,7 +26,6 @@ public interface UserService extends UserDetailsService {
     void incrementTasksReceived(User user);
     void incrementTasksAssigned(User user);
 
-    void updateUserAvatar(User user, HttpServletRequest req);
     void updateUserAttributes(User user, HttpServletRequest req);
 
     void incrementTasksCompleted(User user);

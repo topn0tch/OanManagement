@@ -17,7 +17,7 @@
                     <div class="panel panel-login">
                         <!--Profile pic-->
                         <div class="profile-pic-box">
-                            <img class="img-rounded img-responsive center-block profile-pic" th:src="@{${avatar}}"/>
+                            <img class="img-rounded img-responsive center-block profile-pic" th:src="@{/api/avatar/__${paramUser.id}__}"/>
                             <div th:if="${paramUser.id} == ${loggedUser.id}" class="edit"><a href="/upload-avatar"><i class="fas fa-pencil-alt fa-lg faa-shake animated-hover"></i></a></div>
                         </div>
                         <!-- User info under pic-->

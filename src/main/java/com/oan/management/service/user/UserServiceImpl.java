@@ -1,6 +1,5 @@
 package com.oan.management.service.user;
 
-import com.oan.management.model.Image;
 import com.oan.management.model.Role;
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
@@ -168,16 +167,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserAvatar(User user, HttpServletRequest req) {
-        Image avatar = imageService.getUserImage(user);
-        req.getSession().setAttribute("myAvatar", "/img/"+avatar.getUrl());
-    }
-
-    @Override
     public void updateUserAttributes(User user, HttpServletRequest req) {
         taskService.updateAttributes(user, req);
         messageService.updateAttributes(user, req);
-        updateUserAvatar(user, req);
     }
 
     @Override

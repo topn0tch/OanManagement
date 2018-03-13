@@ -22,7 +22,7 @@
                         </ul>
                     </div>
                     <div class="panel panel-login">
-                        <img class="img-rounded img-responsive center-block profile-pic" th:src="@{${avatar}}"/>
+                        <img class="img-rounded img-responsive center-block profile-pic" th:src="@{/api/avatar/__${paramUser.id}__}"/>
                         <a th:href="@{'/admin/manageusers/'+${paramUser.id}+'/delete-avatar'}" class="btn btn-danger center-block" style="margin-top: 13px">Remove image</a>
                     </div>
                 </div>

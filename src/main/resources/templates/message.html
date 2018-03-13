@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-1">
-                        <img class="img-rounded" th:src="@{${avatar}}" width="64" height="74"/>
+                        <img class="img-rounded img-responsive" th:src="@{/api/avatar/__${message.sender.id}__}"/>
                     </div>
                     <div class="col-md-2">
                         <p>From: <a th:href="@{/profile(id=${message.sender.id})}"><span th:text="${message.sender.firstName} + ' ' + ${message.sender.lastName}"></span></a></p>
