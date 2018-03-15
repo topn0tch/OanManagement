@@ -1,4 +1,4 @@
-package com.oan.management.controller.calendar;
+package com.oan.management.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oan.management.config.CustomAppSettings;
@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/event")
-public class RestWebController {
+public class RestEventController {
     @Autowired
     EventService eventService;
 
