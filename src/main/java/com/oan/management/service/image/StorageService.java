@@ -4,7 +4,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
-import java.util.stream.Stream;
 
 /**
  * Created by Oan on 15/03/2018.
@@ -14,8 +13,6 @@ public interface StorageService {
 
     void store(MultipartFile file, Long id);
 
-    Stream<Path> loadAll();
-
     Path load(String filename);
 
     Resource loadAsResource(String filename);
@@ -24,4 +21,5 @@ public interface StorageService {
 
     void deleteById(Long id);
 
+    boolean isCorrectImageType(MultipartFile file);
 }

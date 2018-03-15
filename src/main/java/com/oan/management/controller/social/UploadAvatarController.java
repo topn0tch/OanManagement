@@ -4,7 +4,6 @@ import com.oan.management.exception.StorageFileNotFoundException;
 import com.oan.management.model.User;
 import com.oan.management.service.image.StorageService;
 import com.oan.management.service.user.UserService;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -42,16 +41,12 @@ public class UploadAvatarController {
     @PostMapping("/upload-avatar")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, Authentication authentication) {
         User user = userService.findByUser(authentication.getName());
-        String extension = FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase();
-        if (extension != null && !extension.isEmpty()) {
-            if (!extension.contains("png") && !extension.contains("jpg")) {
-                System.out.println(extension);
-                return "redirect:/upload-avatar?wrongtype";
-            }
-
+        if (storageService.isCorrectImageType(file)) {
+            storageService.store(file, user.getId());
+            return "redirect:/upload-avatar?success";
+        } else {
+            return "redirect:/upload-avatar?wrongtype";
         }
-        storageService.store(file, user.getId());
-        return "redirect:/upload-avatar?success";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

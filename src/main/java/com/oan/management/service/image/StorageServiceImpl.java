@@ -2,6 +2,7 @@ package com.oan.management.service.image;
 
 import com.oan.management.exception.StorageException;
 import com.oan.management.exception.StorageFileNotFoundException;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -13,8 +14,14 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.*;
-import java.util.stream.Stream;
 
+/**
+ * @author Oan Stultjens
+ * @since 15/03/2018
+ * This is the implementation of {@link StorageService}
+ * @see <a href="https://spring.io/guides/gs/uploading-files/">Spring.io - Uploading files</a><br/>
+ * This one is edited to my own needs
+ */
 @Service
 public class StorageServiceImpl implements StorageService {
 
@@ -39,18 +46,6 @@ public class StorageServiceImpl implements StorageService {
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
-    }
-
-    @Override
-    public Stream<Path> loadAll() {
-        try {
-            return Files.walk(this.rootLocation, 1)
-                    .filter(path -> !path.equals(this.rootLocation))
-                    .map(path -> this.rootLocation.relativize(path));
-        } catch (IOException e) {
-            throw new StorageException("Failed to read stored files", e);
-        }
-
     }
 
     @Override
@@ -88,6 +83,17 @@ public class StorageServiceImpl implements StorageService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean isCorrectImageType(MultipartFile file) {
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase();
+        if (extension != null && !extension.isEmpty()) {
+            if (!extension.contains("png") && !extension.contains("jpg")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
