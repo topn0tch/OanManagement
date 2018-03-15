@@ -68,9 +68,6 @@ public class User {
     @OneToMany
     private List<Bug> bugs;
 
-    @OneToMany
-    private List<Image> images;
-
     @OneToOne
     private Rank rank;
 

@@ -1,9 +1,7 @@
 package com.oan.management.controller.social;
 
-import com.oan.management.model.Image;
 import com.oan.management.model.Message;
 import com.oan.management.model.User;
-import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +28,6 @@ import java.util.List;
 public class MessageController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ImageService imageService;
 
     @Autowired
     private MessageService messageService;
@@ -74,9 +69,6 @@ public class MessageController {
             Message msg = messageService.getMessageById(id);
             model.addAttribute("message", msg);
             msg.setOpened(1);
-            // Get sender's avatar avatar
-            Image avatar = imageService.getUserImage(msg.getSender());
-            model.addAttribute("avatar", "/img/"+avatar.getUrl());
             messageService.save(msg);
             return "message";
         }

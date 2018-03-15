@@ -3,7 +3,6 @@ package com.oan.management.service.user;
 import com.oan.management.model.Role;
 import com.oan.management.model.User;
 import com.oan.management.repository.UserRepository;
-import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
 import com.oan.management.service.task.TaskService;
 import com.oan.management.web.dto.UserRegistrationDto;
@@ -32,9 +31,6 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private ImageService imageService;
 
     @Autowired
     private TaskService taskService;

@@ -1,7 +1,6 @@
 package com.oan.management.controller;
 
 import com.oan.management.model.User;
-import com.oan.management.service.image.ImageService;
 import com.oan.management.service.message.MessageService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,6 @@ public class JsonUsersController {
 
     @Autowired
     private MessageService messageService;
-
-    @Autowired
-    private ImageService imageService;
 
     @GetMapping("/api/users")
     public List<User> getUsers() {
@@ -68,17 +64,4 @@ public class JsonUsersController {
             return 0;
         }
     }
-
-    /*@GetMapping(value = "/api/avatar/{id}", produces = MediaType.IMAGE_PNG_VALUE)
-    @ResponseBody
-    public byte[] getUserAvatar(@PathVariable Long id) throws IOException {
-        InputStream in = getClass().getResourceAsStream("C:/temp/img/avatar/"+id+".png");
-        if (in != null) {
-            return IOUtils.toByteArray(in);
-        } else {
-            in = getClass().getResourceAsStream("C:/temp/img/avatar/0.png");
-            return IOUtils.toByteArray(in);
-        }
-
-    }*/
 }

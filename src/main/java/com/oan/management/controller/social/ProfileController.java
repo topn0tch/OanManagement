@@ -1,9 +1,7 @@
 package com.oan.management.controller.social;
 
-import com.oan.management.model.Image;
 import com.oan.management.model.Rank;
 import com.oan.management.model.User;
-import com.oan.management.service.image.ImageService;
 import com.oan.management.service.rank.RankService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +24,6 @@ public class ProfileController {
     private UserService userService;
 
     @Autowired
-    private ImageService imageService;
-
-    @Autowired
     private RankService rankService;
 
     @GetMapping("/profile")
@@ -45,9 +40,6 @@ public class ProfileController {
             User paramUser = userService.findById(id);
             if (paramUser != null) {
                 model.addAttribute("paramUser", paramUser);
-                // Get user avatar
-                Image avatar = imageService.getUserImage(paramUser);
-                model.addAttribute("avatar", "/img/"+avatar.getUrl());
                 // Get user rank
                 Rank userRank = rankService.getUserRank(paramUser);
                 model.addAttribute("paramUserRank", userRank);
