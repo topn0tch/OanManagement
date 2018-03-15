@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.*;
@@ -30,6 +31,9 @@ public class StorageServiceImpl implements StorageService {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
+            }
+            if (ImageIO.read(file.getInputStream()) == null) {
+                throw new StorageException("Failed to store empty file " + file.getOriginalFilename()+ " - Not an image");
             }
             Files.copy(file.getInputStream(), this.rootLocation.resolve(id.toString()+".jpg"), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {

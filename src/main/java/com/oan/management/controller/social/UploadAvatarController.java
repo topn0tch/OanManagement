@@ -4,6 +4,7 @@ import com.oan.management.exception.StorageFileNotFoundException;
 import com.oan.management.model.User;
 import com.oan.management.service.image.StorageService;
 import com.oan.management.service.user.UserService;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,8 +40,16 @@ public class UploadAvatarController {
     }
 
     @PostMapping("/upload-avatar")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, Authentication authentication) {
+    public String handleFileUpload(@RequestParam("file") MultipartFile file, Authentication authentication) {
         User user = userService.findByUser(authentication.getName());
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase();
+        if (extension != null && !extension.isEmpty()) {
+            if (!extension.contains("png") && !extension.contains("jpg")) {
+                System.out.println(extension);
+                return "redirect:/upload-avatar?wrongtype";
+            }
+
+        }
         storageService.store(file, user.getId());
         return "redirect:/upload-avatar?success";
     }
