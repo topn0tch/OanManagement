@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Oan on 25/01/2018.
+ * Implementation of {@link ContactService}
+ * @author Oan Stultjens
+ * @since 25/01/2018.
  */
 
 @Service

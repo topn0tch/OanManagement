@@ -1,3 +1,4 @@
+/*
 package com.oan.management.controller.social;
 
 import com.oan.management.model.Image;
@@ -15,11 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
+*/
 /**
  * Created by Oan on 30/01/2018.
  * @author Oan Stultjens
  * Controller for the Upload Avatar page
- */
+ *//*
+
 @Controller
 public class ImageController {
     @Autowired
@@ -48,3 +51,4 @@ public class ImageController {
         return "redirect:/upload-avatar?success";
     }
 }
+*/

@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Oan on 12/02/2018.
+ * @author Oan Stultjens
+ * @since 12/02/2018
+ * The implementation of {@link ExpenseService}
+ * Basic CRUD operations are implemented here
+ * @see org.springframework.data.jpa.repository.JpaRepository
  */
 
 @Service
@@ -27,8 +31,13 @@ public class ExpenseServiceImpl implements ExpenseService {
         return expenseRepository.findAllByBudget(budget);
     }
 
+    /**
+     * Calculates the total of expenses from a List
+     * @param expenseList {@link List} of {@link Expense}
+     * @return Double
+     */
     @Override
-    public Double getTotalIncome(List<Expense> expenseList) {
+    public Double getTotalExpense(List<Expense> expenseList) {
         Double total = 0.0;
         for (Expense expense : expenseList) {
             total += expense.getAmount();

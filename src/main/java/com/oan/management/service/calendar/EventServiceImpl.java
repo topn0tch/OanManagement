@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Oan on 26/01/2018.
+ * Implementation of {@link EventService}
+ * @author Oan Stultjens
+ * @since 26/01/2018.
  */
 
 @Service

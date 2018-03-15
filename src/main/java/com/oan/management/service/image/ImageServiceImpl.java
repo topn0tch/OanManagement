@@ -15,13 +15,14 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by Oan on 30/01/2018.
+ * @author Oan Stultjens
+ * @since 30/01/2018.
  * Implementation of {@link ImageService}
  */
 
 @Service
 public class ImageServiceImpl implements ImageService {
-    private final String ROOT = "C:/oanManagement/src/main/resources/static/img/";
+    private final String ROOT = "C:/temp/img/";
 
     @Autowired
     ImageRepository imageRepository;
@@ -59,11 +60,24 @@ public class ImageServiceImpl implements ImageService {
         }
     }
 
+    /**
+     * Remove an image of an user, this will set the user's image to 0.png
+     * This method is only used for users with ROLE_ADMIN
+     * @see com.oan.management.controller.administration.AdminController
+     * @param user {@link User}
+     * @return Image
+     */
     @Override
     public Image removeUserImage(User user) {
         Image image = imageRepository.findByTitle(user.getId()+".png");
         if (image != null) {
             image.setUrl("/avatar/0.png");
+            File file = new File(ROOT+"/avatar/"+user.getId()+".png");
+            if (file.delete()) {
+                System.out.println("file has been deleted");
+            } else {
+                System.out.println("file not found");
+            }
             return imageRepository.save(image);
         } else {
             return imageRepository.save(new Image("0.png", "/avatar/0.png", user));

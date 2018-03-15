@@ -1,6 +1,5 @@
 package com.oan.management.controller.administration;
 
-import com.oan.management.model.Image;
 import com.oan.management.model.User;
 import com.oan.management.service.image.ImageService;
 import com.oan.management.service.user.UserService;
@@ -58,8 +57,6 @@ public class AdminController {
                 User paramUser = userService.findById(id);
                 model.addAttribute("paramUser", paramUser);
                 model.addAttribute("currentCountry", paramUser.getCountry());
-                Image avatar = imageService.getUserImage(paramUser);
-                model.addAttribute("avatar", "/img/"+avatar.getUrl());
             }
         }
         return "edituser";

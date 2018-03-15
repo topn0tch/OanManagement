@@ -23,7 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Created by Oan on 9/02/2018.
+ * @since 9/02/2018.
  * @author Oan Stultjens
  * Controller for the Budget Management
  */
@@ -93,7 +93,7 @@ public class BudgetController {
                 List<Expense> expenseList = expenseService.findAllByBudget(paramBudget);
                 // Get the total of incomes and expenses
                 Double totalIncome = incomeService.getTotalIncome(incomeList);
-                Double totalExpense = expenseService.getTotalIncome(expenseList);
+                Double totalExpense = expenseService.getTotalExpense(expenseList);
 
                 // Calculations
                 Double leftOver = (paramBudget.getBudgetAmount() + (totalIncome - totalExpense));

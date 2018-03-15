@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Oan on 9/02/2018.
+ * @author Oan Stultjens
+ * @since 9/02/2018.
+ * The implementation of {@link BudgetService}
+ * Basic CRUD operations are implemented here
+ * @see org.springframework.data.jpa.repository.JpaRepository
  */
 
 @Service
@@ -20,26 +24,49 @@ public class BudgetServiceImpl implements BudgetService{
     @Autowired
     ExpenseService expenseService;
 
+    /**
+     * Retrieve a list of all budgets
+     * @return List of {@link Budget}
+     */
     @Override
     public List<Budget> findAll() {
         return budgetRepository.findAll();
     }
 
+    /**
+     * Retrieve a list of budgets from the specified {@link User}
+     * @param user {@link User}
+     * @return List of {@link Budget}
+     */
     @Override
     public List<Budget> findAllByUser(User user) {
         return budgetRepository.findAllByUser(user);
     }
 
+    /**
+     * Save a {@link Budget} to the database
+     * @param budget {@link Budget}
+     * @return Budget
+     */
     @Override
     public Budget save(Budget budget) {
         return budgetRepository.save(budget);
     }
 
+    /**
+     * Find a {@link Budget} by the specified id
+     * @param id Long
+     * @return Budget
+     */
     @Override
     public Budget findById(Long id) {
         return budgetRepository.findById(id);
     }
 
+    /**
+     * Delete a {@link Budget} by the specified id
+     * @param id Long
+     */
     @Override
     public void deleteById(Long id) {
         budgetRepository.delete(budgetRepository.findById(id));

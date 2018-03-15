@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Oan on 12/02/2018.
+ * Implementation of {@link IncomeService}
+ * Basic CRUD operations
+ * @author Oan Stultjens
+ * @since 12/02/2018.
  */
 
 @Service

@@ -6,7 +6,8 @@ import com.oan.management.model.User;
 import java.util.List;
 
 /**
- * Created by Oan on 26/01/2018.
+ * @author Oan Stultjens
+ * @since 26/01/2018.
  */
 public interface EventService {
     List<Event> findAllByUser(User user);
