@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class FileUploadController {
+public class UploadAvatarController {
 
     private final StorageService storageService;
 
@@ -26,7 +26,7 @@ public class FileUploadController {
     private UserService userService;
 
     @Autowired
-    public FileUploadController(StorageService storageService) {
+    public UploadAvatarController(StorageService storageService) {
         this.storageService = storageService;
     }
 
@@ -41,27 +41,20 @@ public class FileUploadController {
     @GetMapping("/api/avatar/{id}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable Long id) {
-
         Resource file = null;
         try {
             file = storageService.loadAsResource(id.toString()+".jpg");
         } catch (StorageFileNotFoundException e) {
             file = storageService.loadAsResource("0.jpg");
         }
-
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
     @PostMapping("/upload-avatar")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes, Authentication authentication) {
+    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, Authentication authentication) {
         User user = userService.findByUser(authentication.getName());
-
         storageService.store(file, user.getId());
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.getOriginalFilename() + "!");
-
         return "redirect:/upload-avatar?success";
     }
 

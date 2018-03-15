@@ -22,4 +22,6 @@ public interface StorageService {
 
     void deleteAll();
 
+    void deleteById(Long id);
+
 }

@@ -1,6 +1,7 @@
 package com.oan.management.controller.administration;
 
 import com.oan.management.model.User;
+import com.oan.management.service.image.StorageService;
 import com.oan.management.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,9 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private StorageService storageService;
 
     @GetMapping("/admin")
     public String getAdminPanel(Model model, Authentication authentication, HttpServletRequest req) {
@@ -67,9 +71,10 @@ public class AdminController {
     }
 
     @GetMapping("/admin/manageusers/{id}/delete-avatar")
-    public String deleteUserAvatar(User user, @PathVariable Long id) {
+    public String deleteUserAvatar(@PathVariable Long id) {
         User paramUser = userService.findById(id);
         if (paramUser != null) {
+            storageService.deleteById(id);
             return "redirect:/admin/manageusers/"+id;
         }
         return "redirect:/admin/manageusers/"+id;
