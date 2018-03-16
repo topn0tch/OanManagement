@@ -7,7 +7,19 @@
     <script src="js/calendar.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.print.min.css " rel="stylesheet" type="text/css" media="print" />
     <title>Calendar</title>
+
+    <style>
+        @media print {
+            a[href]:after {
+                content: none !important;
+            }
+        }
+        .glyphicon {
+            margin-left: 4px;
+        }
+    </style>
 
     <body>
         <div th:replace="fragments/navigation :: navigation"></div>
@@ -104,7 +116,7 @@
                                 </div>
                             </div>
                             <br/>
-                            <div class="control-group">
+                            <div id="editEventColourGroup" class="control-group">
                                 <label class="control-label" for="theColor">Colour: </label>
                                 <div class="field desc">
                                     <select name="color" class="form-control" id="eventEditColour">
@@ -139,7 +151,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                            <button id="editCancelButton" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                             <a class="btn btn-danger pull-left" id="deleteButton">Delete</a>
                             <a class="btn btn-primary" id="submitEditButton">Save</a>
                         </div>

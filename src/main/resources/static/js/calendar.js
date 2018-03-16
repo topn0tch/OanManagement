@@ -37,6 +37,14 @@ $(document).ready(function () {
                 eventLimit: 4
             }
         },
+        customButtons: {
+            printButton: {
+                text: 'Print',
+                click: function() {
+                    window.print();
+                }
+            }
+        },
         eventColor: '#5C6BC0',
         firstDay: 1,
         googleCalendarApiKey: 'AIzaSyB3TNtPD1CNpwIZW2W2Yqx2LRXBkskgIKs',
@@ -62,6 +70,7 @@ $(document).ready(function () {
             if (event.url) {
                 return false;
             }
+
             endtime = $.fullCalendar.moment(event.end).format('h:mm');
             starttime = $.fullCalendar.moment(event.start).format('dddd, MMMM Do YYYY, h:mm');
 
@@ -82,6 +91,19 @@ $(document).ready(function () {
             $("#editEventModal").on('shown.bs.modal', function() {
                 $('#modalEditTitle').focus();
             });
+
+            console.log(event.title.substr(0,6));
+            if (event.title.substr(0,6) == "To-do:") {
+                $('#modalEditTitle').attr("disabled", "disabled");
+                $('#modalEditDesc').attr("disabled", "disabled");
+                $('#eventEditColour').attr("disabled", "disabled");
+                $('#editCancelButton').text("Close");
+            } else {
+                $('#modalEditTitle').removeAttr('disabled');
+                $('#modalEditDesc').removeAttr('disabled');
+                $('#eventEditColour').removeAttr('disabled');
+                $('#editCancelButton').text("Cancel");
+            }
 
             $('#submitEditButton').on('click', function (e) {
                 e.preventDefault();
@@ -141,6 +163,7 @@ $(document).ready(function () {
         eventRender: function(event, element){
             element.popover({
                 animation:true,
+                html: true,
                 delay: 800,
                 content: event.description,
                 trigger: 'hover'
@@ -154,7 +177,10 @@ $(document).ready(function () {
         header: {
             left: 'prev, next today',
             center: 'title',
-            right: 'month, agendaWeek, agendaDay, listWeek'
+            right: 'month, agendaWeek, agendaDay, listWeek, printButton'
+        },
+        bootstrapGlyphicons: {
+            printButton: 'glyphicon-print'
         }
     })
 
