@@ -107,9 +107,8 @@ $(document).ready(function () {
 
             $('#submitEditButton').on('click', function (e) {
                 e.preventDefault();
-                var item = calendar.fullCalendar( 'clientEvents', event.id );
                 $("#editEventModal").modal('hide');
-                var eventID = event.id;
+                var eventID = $('#eventEditID').val();
                 var start = $('#startEditTime').attr("value");
                 var end = $('#endEditTime').attr("value");
                 var colour = $('#eventEditColour').val();
@@ -126,9 +125,12 @@ $(document).ready(function () {
                 $.ajax({
                     url: 'calendar-updateevent',
                     data: {title: title, start: start, end: end, id: eventID, colour: colour, desc: description},
-                    type: "GET"
+                    type: "GET",
+                    success: function () {
+                        $('#calendar').fullCalendar('refetchEventSources', '/api/event/all' );
+                    }
                 });
-                calendar.fullCalendar('updateEvent', event);
+
             })
         },
         select: function(start, end, jsEvent) {
