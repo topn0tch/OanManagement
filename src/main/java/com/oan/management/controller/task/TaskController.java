@@ -6,6 +6,7 @@ import com.oan.management.repository.UserRepository;
 import com.oan.management.service.rank.RankService;
 import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
+import com.oan.management.utility.StringToDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
@@ -91,14 +90,10 @@ public class TaskController {
             model.addAttribute("tasks", taskList);
         }
 
-        // HTML String date to Date
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            java.sql.Date sqlDate = new java.sql.Date(format.parse(date).getTime());
-            task.setTargetDate(sqlDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        StringToDate stringToConvert = new StringToDate();
+        Date sqlDate = stringToConvert.convert(date);
+        task.setTargetDate(sqlDate);
+
         taskService.save(new Task(userLogged, task.getDescription(), task.getTargetDate(), task.isCompleted(), userLogged, true ));
         userService.incrementTasksCreated(userLogged);
         return "redirect:/task-list";
@@ -130,14 +125,9 @@ public class TaskController {
             model.addAttribute("loggedUser", userLogged);
         }
 
-        // HTML String date to Date
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); //TODO: Make utility
-        try {
-            java.sql.Date sqlDate = new java.sql.Date(format.parse(date).getTime());
-            task.setTargetDate(sqlDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        StringToDate stringToConvert = new StringToDate();
+        Date sqlDate = stringToConvert.convert(date);
+        task.setTargetDate(sqlDate);
 
         User target = userService.findById(id);
         if (target != null) {

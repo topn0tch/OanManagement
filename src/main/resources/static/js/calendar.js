@@ -38,6 +38,16 @@ $(document).ready(function () {
             }
         },
         customButtons: {
+            screenshotButton: {
+                text: 'Screenshot',
+                click: function() {
+                    // window.print();
+                    html2canvas(document.getElementById('calendarContainer')).then(function(canvas) {
+                        $('#screenshotModal').modal('toggle');
+                        $('#screenshotModal #screenshotModalBody').append(canvas);
+                    });
+                }
+            },
             printButton: {
                 text: 'Print',
                 click: function() {
@@ -179,10 +189,11 @@ $(document).ready(function () {
         header: {
             left: 'prev, next today',
             center: 'title',
-            right: 'month, agendaWeek, agendaDay, listWeek, printButton'
+            right: 'month, agendaWeek, agendaDay, listWeek, printButton, screenshotButton'
         },
         bootstrapGlyphicons: {
-            printButton: 'glyphicon-print'
+            printButton: 'glyphicon-print',
+            screenshotButton: 'glyphicon-camera'
         }
     })
 

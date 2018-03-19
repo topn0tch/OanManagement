@@ -7,6 +7,7 @@
     <script src="js/calendar.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.print.min.css " rel="stylesheet" type="text/css" media="print" />
     <title>Calendar</title>
 
@@ -15,15 +16,23 @@
             a[href]:after {
                 content: none !important;
             }
+            canvas {
+                max-width: 100% !important;
+            }
         }
         .glyphicon {
             margin-left: 4px;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
         }
     </style>
 
     <body>
         <div th:replace="fragments/navigation :: navigation"></div>
-        <div class="container">
+        <div class="container" id="calendarContainer">
             <div th:if="${param.notitle}">
                 <div class="alert alert-danger alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -88,6 +97,20 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+            <div id="screenshotModal" class="modal fade" role="dialog">
+                <div class="modal-dialog" style="width: 80%; height:100%;padding:0;">
+                    <div class="modal-content" style="height: auto;min-height: 100%">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="text-center">Export to image (html2canvas)</h4>
+                        </div>
+                        <div id="screenshotModalBody" class="modal-body" style="">
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
