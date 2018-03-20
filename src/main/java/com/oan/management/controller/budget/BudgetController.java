@@ -88,9 +88,6 @@ public class BudgetController {
                 // Save the id in a attribute to save later values
                 Budget paramBudget = budgetService.findById(id);
                 model.addAttribute("paramBudget", paramBudget);
-                // Get incomes and expenses
-                List<Income> incomeList = incomeService.findAllByBudget(paramBudget);
-                List<Expense> expenseList = expenseService.findAllByBudget(paramBudget);
                 // Settings attributes
                 model.addAttribute("totalIncome", incomeService.getTotalIncome(paramBudget));
                 model.addAttribute("totalExpense", expenseService.getTotalExpense(paramBudget));
@@ -99,8 +96,8 @@ public class BudgetController {
                 model.addAttribute("expensesPercent", expenseService.calculateExpensesPercent(paramBudget));
                 model.addAttribute("incomesPercent", incomeService.calculateIncomesPercent(paramBudget));
                 // Lists
-                model.addAttribute("incomeList", incomeList);
-                model.addAttribute("expenseList", expenseList);
+                model.addAttribute("incomeList", incomeService.findAllByBudget(paramBudget));
+                model.addAttribute("expenseList", expenseService.findAllByBudget(paramBudget));
             } else {
                 return "redirect:budget-list?notfound";
             }
@@ -108,7 +105,7 @@ public class BudgetController {
         return "budget";
     }
 
-    @GetMapping("budget-delete")
+    @GetMapping("/budget-delete")
     public String deleteBudget(Authentication authentication, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         Budget paramBudget = budgetService.findById(id);
@@ -120,7 +117,7 @@ public class BudgetController {
         }
     }
 
-    @GetMapping("income-delete")
+    @GetMapping("/income-delete")
     public String deleteIncome(Authentication authentication, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         List<Budget> budgetList = budgetService.findAllByUser(userLogged);
@@ -135,7 +132,7 @@ public class BudgetController {
         }
     }
 
-    @GetMapping("income-edit")
+    @GetMapping("/income-edit")
     public String getEditIncome(Model model, Authentication authentication, @RequestParam Long id, Income income) {
         User userLogged = userService.findByUser(authentication.getName());
         List<Budget> budgetList = budgetService.findAllByUser(userLogged);
@@ -155,7 +152,7 @@ public class BudgetController {
         }
     }
 
-    @PostMapping("income-edit")
+    @PostMapping("/income-edit")
     public String editIncome(Authentication authentication, Income income, @RequestParam Long id) {
         if (income.getDescription().length() > 0 && income.getDescription().length() <= 50) {
             if (income.getAmount() > 0 && income.getAmount() < CustomAppSettings.MAXIMUM_INCOME_AND_EXPENSE_AMOUNT) {
@@ -169,7 +166,7 @@ public class BudgetController {
         }
     }
 
-    @GetMapping("expense-edit")
+    @GetMapping("/expense-edit")
     public String getEditExpense(Model model, Authentication authentication, @RequestParam Long id, Expense expense) {
         User userLogged = userService.findByUser(authentication.getName());
         List<Budget> budgetList = budgetService.findAllByUser(userLogged);
@@ -189,7 +186,7 @@ public class BudgetController {
         }
     }
 
-    @PostMapping("expense-edit")
+    @PostMapping("/expense-edit")
     public String editExpense(Authentication authentication, Expense expense, @RequestParam Long id) {
         if (expense.getDescription().length() > 0 && expense.getDescription().length() <= 50) {
             if (expense.getAmount() > 0 && expense.getAmount() < CustomAppSettings.MAXIMUM_INCOME_AND_EXPENSE_AMOUNT) {
@@ -203,7 +200,7 @@ public class BudgetController {
         }
     }
 
-    @GetMapping("expense-delete")
+    @GetMapping("/expense-delete")
     public String deleteExpense(Authentication authentication, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         List<Budget> budgetList = budgetService.findAllByUser(userLogged);
