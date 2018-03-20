@@ -1,7 +1,9 @@
 package com.oan.management.exception;
 
 /**
- * Created by Oan on 15/03/2018.
+ * Exception class thrown when storage couldn't be located
+ * @author Oan Stultjens
+ * @since 15/03/2018
  */
 public class StorageFileNotFoundException extends StorageException {
 
