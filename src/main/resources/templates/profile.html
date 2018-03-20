@@ -12,6 +12,12 @@
         <div th:replace="fragments/navigation :: navigation"></div>
 
         <div class="container">
+            <div th:if="${param.assigned}">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <span class="fas fa-calendar marginright"></span><strong>Task has been assigned!</strong> <br/><span th:text="${paramUser.username}"/> will receive your task and hopefully accept it!
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="panel panel-login">

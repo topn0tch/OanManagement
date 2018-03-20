@@ -2,7 +2,6 @@ package com.oan.management.controller.task;
 
 import com.oan.management.model.Task;
 import com.oan.management.model.User;
-import com.oan.management.repository.UserRepository;
 import com.oan.management.service.rank.RankService;
 import com.oan.management.service.task.TaskService;
 import com.oan.management.service.user.UserService;
@@ -31,9 +30,6 @@ import java.util.List;
 public class TaskController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private TaskService taskService;
@@ -141,7 +137,7 @@ public class TaskController {
         User target = userService.findById(id);
         if (target != null) {
             taskService.save(new Task(target, task.getDescription(), task.getTargetDate(), false, userLogged, false ));
-            return "redirect:/profile?id="+target.getId();
+            return "redirect:/profile?id="+target.getId()+"&assigned";
         } else {
             return "redirect:task-list?usernotfound";
         }
