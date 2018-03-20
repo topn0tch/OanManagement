@@ -9,6 +9,7 @@ import java.sql.Date;
 
 /**
  * @author Oan Stultjens
+ * Data Transfer Object
  * This is a model of a User used for the registration process to validate the user
  * @see com.oan.management.controller.authentication.UserRegistrationController
  */

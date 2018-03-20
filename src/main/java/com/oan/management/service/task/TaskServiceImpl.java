@@ -48,6 +48,11 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.delete(taskRepository.findById(id));
     }
 
+    /**
+     * Completes a task by the specified id
+     * @param id Long
+     * @return Task
+     */
     @Override
     public Task completeTaskById(Long id) {
         Task task = taskRepository.findById(id);
@@ -65,6 +70,14 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.getById(id);
     }
 
+    /**
+     * Edits a task by the specified id
+     * @param id Long
+     * @param desc String
+     * @param date Date
+     * @param completed boolean
+     * @return Task
+     */
     @Override
     public Task editById(Long id, String desc, Date date, boolean completed) {
         Task task = taskRepository.getById(id);
@@ -125,6 +138,10 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findByUserAndApprovedIsFalse(user);
     }
 
+    /**
+     * Approves a task, and updates stats of the users
+     * @param task Task
+     */
     @Override
     public void approveTask(Task task) {
         task.setApproved(true);
@@ -138,6 +155,10 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
     }
 
+    /**
+     * Denies a task, sends a message to the task author, and deletes the task from the database (cleanup)
+     * @param task Task
+     */
     @Override
     public void denyTask(Task task) {
         deleteTaskById(task.getId());
@@ -152,6 +173,12 @@ public class TaskServiceImpl implements TaskService {
         messageService.save(notifyMessage);
     }
 
+    /**
+     * Updates the user's session attributes for the 'unapproved' tasks, motivational message and
+     * how many tasks left aswell
+     * @param user {@link User}
+     * @param req {@link HttpServletRequest}
+     */
     @Override
     public void updateAttributes(User user, HttpServletRequest req) {
         List<Task> taskList = taskRepository.findByUserAndCompletedIsFalseAndApprovedIsTrue(user);
@@ -162,6 +189,11 @@ public class TaskServiceImpl implements TaskService {
         req.getSession().setAttribute("pendingTasksCount", pendingTasks.size());
     }
 
+    /**
+     * Uncompletes a task by the given id
+     * @param id Long
+     * @return Task
+     */
     @Override
     public Task uncompleteTaskById(Long id) {
         Task task = taskRepository.findById(id);

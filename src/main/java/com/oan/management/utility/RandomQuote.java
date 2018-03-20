@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Created by Oan on 23/02/2018.
  * @author Oan Stultjens
+ * @since 23/02/2018
  */
 public class RandomQuote {
     private String url;

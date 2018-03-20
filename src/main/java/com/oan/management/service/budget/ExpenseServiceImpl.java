@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ *  * The implementation of {@link ExpenseService}
+ * Basic CRUD operations are implemented here
+ *
  * @author Oan Stultjens
  * @since 12/02/2018
- * The implementation of {@link ExpenseService}
- * Basic CRUD operations are implemented here
  * @see org.springframework.data.jpa.repository.JpaRepository
  */
 

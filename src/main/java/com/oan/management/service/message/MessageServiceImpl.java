@@ -41,6 +41,11 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.save(message);
     }
 
+    /**
+     * Get a list of unread messages
+     * @param user
+     * @return
+     */
     @Override
     public List<Message> getAllByReceiverAndOpenedIsFalse(User user) {
         return messageRepository.getAllByReceiverAndOpenedIsFalse(user);
@@ -71,6 +76,12 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.save(notifyMessage);
     }
 
+    /**
+     * Updates the user's session attributes for unread messages
+     * If the user has unread message(s), the last message will also be added (for the main page)
+     * @param user
+     * @param req
+     */
     @Override
     public void updateAttributes(User user, HttpServletRequest req) {
         List<Message> unreadMessages = findByReceiverAndOpenedIs(user, 0);

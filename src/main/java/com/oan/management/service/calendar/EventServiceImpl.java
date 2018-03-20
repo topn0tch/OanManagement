@@ -39,6 +39,15 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findById(id);
     }
 
+    /**
+     * Edits an event by the specified id, only basic information of the event is passed
+     * This one is used for drag and drop in the calendar
+     * @param id Long
+     * @param title String
+     * @param start String
+     * @param end String
+     * @return Event
+     */
     @Override
     public Event editById(Long id, String title, String start, String end) {
         Event event = eventRepository.findById(id);
@@ -49,6 +58,16 @@ public class EventServiceImpl implements EventService {
         return eventRepository.save(event);
     }
 
+    /**
+     * Edits an event with all available information, colour is included aswell
+     * This one is used for the 'edit event' modal
+     * @param event Event
+     * @param title String
+     * @param description String
+     * @param backgroundColour String (HEX colour)
+     * @param borderColour String (HEX colour)
+     * @return Event
+     */
     @Override
     public Event editEventAndColour(Event event, String title, String description, String backgroundColour, String borderColour) {
         event.setTitle(title);

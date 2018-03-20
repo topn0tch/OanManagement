@@ -33,6 +33,12 @@ public class StorageServiceImpl implements StorageService {
         init();
     }
 
+    /**
+     * Stores a multipart file to the server
+     * @throws StorageException
+     * @param file {@link MultipartFile}
+     * @param id Long for the filename which will be saved as {userid}.jpg
+     */
     @Override
     public void store(MultipartFile file, Long id) {
         try {
@@ -53,6 +59,12 @@ public class StorageServiceImpl implements StorageService {
         return rootLocation.resolve(filename);
     }
 
+    /**
+     * Loads a specified file as {@link Resource}
+     * @throws StorageFileNotFoundException
+     * @param filename String
+     * @return Resource
+     */
     @Override
     public Resource loadAsResource(String filename) {
         try {
@@ -75,6 +87,10 @@ public class StorageServiceImpl implements StorageService {
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
 
+    /**
+     * Deletes a profile picture by the specified id
+     * @param id
+     */
     @Override
     public void deleteById(Long id) {
         Path path = load(id.toString()+".jpg");
@@ -85,6 +101,12 @@ public class StorageServiceImpl implements StorageService {
         }
     }
 
+    /**
+     * Checks if the uploaded {@link MultipartFile} is a correct image
+     * Only '.png' and '.jpg' allowed
+     * @param file {@link MultipartFile}
+     * @return boolean
+     */
     @Override
     public boolean isCorrectImageType(MultipartFile file) {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase();
@@ -96,6 +118,11 @@ public class StorageServiceImpl implements StorageService {
         return true;
     }
 
+    /**
+     * The initializer for the storage.
+     * @throws StorageException
+     * @throws IOException
+     */
     @Override
     public void init() {
         try {

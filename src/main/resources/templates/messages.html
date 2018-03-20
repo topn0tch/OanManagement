@@ -21,25 +21,25 @@
         <div th:if="${param.error}">
             <div class="alert alert-danger alert-dismissable">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                This message does not exist
+                <span class="fas fa-exclamation-circle marginright"></span> This message does not exist
             </div>
         </div>
         <div th:if="${param.self}">
             <div class="alert alert-danger alert-dismissable">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                You can't message yourself
+                <span class="fas fa-exclamation-circle marginright"></span> You can't message yourself
             </div>
         </div>
         <div th:if="${param.erroruser}">
             <div class="alert alert-danger alert-dismissable">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                This user does not exist
+                <span class="fas fa-exclamation-circle marginright"></span> This user does not exist
             </div>
         </div>
         <div th:if="${param.success}">
             <div class="alert alert-success alert-dismissable">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Your message has been sent!
+                <span class="fas fa-paper-plane marginright"></span> Your message has been sent!
             </div>
         </div>
 

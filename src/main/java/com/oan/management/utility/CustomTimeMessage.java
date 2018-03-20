@@ -3,7 +3,9 @@ package com.oan.management.utility;
 import java.util.Calendar;
 
 /**
- * Created by Oan on 20/02/2018.
+ * An utility class I made for the main page, to show a custom greeting by the current time
+ * @author Oan Stultjens
+ * @since 20/02/2018
  */
 public class CustomTimeMessage {
     /**

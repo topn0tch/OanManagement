@@ -64,7 +64,7 @@
                 <ul id="notification" class="nav navbar-nav navbar-right navbarAvatarAndMessage">
                     <a href="/profile"><img data-toggle="tooltip" data-placement="bottom" title="Profile" sec:authorize="isAuthenticated()" style="margin-top: 10px" class="img-circle" th:src="@{/api/avatar/__${loggedUser.id}__}" width="32" height="32"/></a>
                     <li sec:authorize="isAuthenticated()">
-                        <a th:if="${session.pendingTasksCount} > 0" href="/tasks-pending" data-toggle="tooltip" data-placement="bottom" th:title="${session.pendingTasksCount}+' pending task(s)'"><span th:if="${session.pendingTasksCount} > 0" class="fas fa-bell margindown fa-lg faa-ring animated"> </span><span
+                        <a th:if="${session.pendingTasksCount} > 0" href="/tasks-pending" data-toggle="tooltip" data-placement="bottom" th:title="${session.pendingTasksCount}+' pending task(s)'"><span th:if="${session.pendingTasksCount} > 0" class="fas fa-calendar-check marginright margindown fa-lg faa-ring animated"> </span><span
                                 th:text="${session.pendingTasksCount}" class="badge" style="margin-top: 1px"></span></a>
                     </li>
                     <li sec:authorize="isAuthenticated()">

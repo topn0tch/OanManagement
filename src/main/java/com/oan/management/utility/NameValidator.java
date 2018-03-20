@@ -4,7 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Oan on 26/02/2018.
+ * @author Oan Stultjens
+ * @since 26/02/2018
  * Snippet source:
  * https://stackoverflow.com/questions/44421036/check-if-name-is-valid-with-proper-case-and-max-one-space
  */

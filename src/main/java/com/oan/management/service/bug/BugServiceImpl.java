@@ -11,6 +11,7 @@ import java.util.List;
  * @since 29/01/2018.
  * @author Oan Stultjens
  * Implementation of {@link BugService}
+ * Basic CRUD operations
  */
 
 @Service
@@ -28,6 +29,10 @@ public class BugServiceImpl implements BugService {
         return bugRepository.save(bug);
     }
 
+    /**
+     * Find unfixed bugs
+     * @return List of {@link Bug}
+     */
     @Override
     public List<Bug> findByFixedIsFalse() {
         return bugRepository.findByFixedIsFalse();

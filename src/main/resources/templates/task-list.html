@@ -26,25 +26,25 @@
                 <div th:if="${param.notfound}">
                     <div class="alert alert-danger alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        Task not found
+                        <span class="fas fa-exclamation-circle marginright"></span> Task not found
                     </div>
                 </div>
                 <div th:if="${param.usernotfound}">
                     <div class="alert alert-danger alert-dismissable">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        User not found
+                        <span class="fas fa-exclamation-circle marginright"></span> User not found
                     </div>
                 </div>
                 <div th:if="${param.self}">
                     <div class="alert alert-info alert-dismissable">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        You can add tasks for yourself here
+                        <span class="fas fa-info-circle marginright"></span> You can add tasks for yourself here
                     </div>
                 </div>
                 <div th:if="${param.updated}">
                     <div class="alert alert-success alert-dismissable">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        Task has been updated
+                        <span class="fas fa-check marginright"></span> Task has been updated
                     </div>
                 </div>
 

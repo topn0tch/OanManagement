@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Implementation of {@link ContactService}
+ * Basic CRUD operations
+ * @see org.springframework.data.jpa.repository.JpaRepository
  * @author Oan Stultjens
  * @since 25/01/2018.
  */
