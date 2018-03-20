@@ -88,7 +88,7 @@
                                 E-mail:
                             </div>
                             <div class="col-md-40">
-                                <p><a th:href="@{mailto:} +${paramUser.email}" class="fa fa-envelope fa-lg padding5"></a> <span th:text="${paramUser.email}"></span></p>
+                                <p><a th:href="@{mailto:} +${paramUser.email}" class="fa fa-envelope fa-lg" style="margin-right: 3px"></a> <span th:text="${paramUser.email}"></span></p>
                             </div>
                         </div>
                         <div th:if="${paramUser.facebook != '' and paramUser.facebook != null }">
@@ -96,7 +96,7 @@
                                 Facebook:
                             </div>
                             <div class="col-md-40">
-                                <p><a th:href="@{https://facebook.com/} + ${paramUser.facebook}" class="fab fa-facebook-square fa-lg padding5"></a> <span th:text="${paramUser.facebook}"></span></p>
+                                <p><a th:href="@{https://facebook.com/} + ${paramUser.facebook}" class="fab fa-facebook-square fa-lg marginright"></a> <span th:text="${paramUser.facebook}"></span></p>
                             </div>
                         </div>
                         <div th:if="${paramUser.twitter != '' and paramUser.twitter != null }">
@@ -104,7 +104,7 @@
                                 Twitter:
                             </div>
                             <div class="col-md-40">
-                                <p><a th:href="@{https://twitter.com/} + ${paramUser.twitter}" class="fab fa-twitter fa-lg padding5"></a> <span th:text="${paramUser.twitter}"></span></p>
+                                <p><a th:href="@{https://twitter.com/} + ${paramUser.twitter}" class="fab fa-twitter fa-lg" style="margin-right: 2px"></a> <span th:text="${paramUser.twitter}"></span></p>
                             </div>
                         </div>
                         <div th:if="${paramUser.skype != '' and paramUser.skype != null }">
@@ -112,7 +112,7 @@
                                 Skype:
                             </div>
                             <div class="col-md-40">
-                                <p><a th:href="@{skype:} +${paramUser.skype}" class="fab fa-skype fa-lg padding5"></a> <span th:text="${paramUser.skype}"></span></p>
+                                <p><a th:href="@{skype:} +${paramUser.skype}" class="fab fa-skype fa-lg marginright"></a> <span th:text="${paramUser.skype}"></span></p>
                             </div>
                         </div>
                         <div th:if="${paramUser.github != '' and paramUser.github != null }">
@@ -120,7 +120,7 @@
                                 GitHub:
                             </div>
                             <div class="col-md-40">
-                                <p><a th:href="@{https://github.com/} + ${paramUser.github}" class="fab fa-github fa-lg padding5"></a> <span th:text="${paramUser.github}"></span></p>
+                                <p><a th:href="@{https://github.com/} + ${paramUser.github}" class="fab fa-github fa-lg" style="margin-right: 4px"></a> <span th:text="${paramUser.github}"></span></p>
                             </div>
                         </div>
                     </div>

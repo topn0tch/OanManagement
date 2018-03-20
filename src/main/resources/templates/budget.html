@@ -48,7 +48,7 @@
 
                             <div class="progress">
                                 <div id="test" class="progress-bar progress-bar-success" role="progressbar" th:value="${incomesPercent}" th:style="'width:0%'">
-                                    Budget <span>&euro; <span th:text="${paramBudget.budgetAmount} - ${totalExpense}"></span></span>
+                                    Budget <span>&euro; <span th:text="${budgetLeft}"></span></span>
                                 </div>
 
                                 <div class="progress-bar progress-bar-danger" role="progressbar" th:value="${expensesPercent}" th:style="'width: 0%'">
