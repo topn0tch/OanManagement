@@ -38,16 +38,6 @@ public class CalendarController {
         return "calendar";
     }
 
-    /**
-     * This controller is used for adding new events
-     * @param authentication
-     * @param start
-     * @param end
-     * @param title
-     * @param description
-     * @param colour
-     * @return String
-     */
     @GetMapping("/calendar-addevent")
     public String calendarAddEvent(Authentication authentication, @RequestParam String start, @RequestParam String end, @RequestParam String title, @RequestParam String description, @RequestParam String colour) {
         User userLogged = userService.findByUser(authentication.getName());
@@ -71,15 +61,6 @@ public class CalendarController {
         return "redirect:/calendar";
     }
 
-    /**
-     * This controller is the simple controller for dragging and dropping events, only title and start/end are passed
-     * @param authentication
-     * @param title
-     * @param start
-     * @param end
-     * @param id
-     * @return String
-     */
     @GetMapping("/calendar-update")
     public String updateEvent(Authentication authentication, @RequestParam String title, @RequestParam String start, @RequestParam String end, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
@@ -87,17 +68,6 @@ public class CalendarController {
         return "redirect:/calendar";
     }
 
-    /**
-     * This controller updates an event including it's colour, description etc
-     * @param authentication
-     * @param title
-     * @param start
-     * @param end
-     * @param id
-     * @param colour
-     * @param desc
-     * @return String
-     */
     @GetMapping("/calendar-updateevent")
     public String updateEventNew(Authentication authentication, @RequestParam String title, @RequestParam String start, @RequestParam String end, @RequestParam Long id, @RequestParam String colour, @RequestParam String desc) {
         User userLogged = userService.findByUser(authentication.getName());

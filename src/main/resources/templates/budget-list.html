@@ -26,9 +26,9 @@
                             </div>
                         </div>
                         <div th:if="${param.deleted}">
-                            <div class="alert alert-info alert-dismissable">
+                            <div class="alert alert-danger alert-dismissable">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                The budget has been deleted
+                                <span class="fa fa-trash"/> The budget has been deleted
                             </div>
                         </div>
                         <div th:if="${param.notfound}">

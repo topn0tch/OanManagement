@@ -51,7 +51,7 @@ public class BugController {
     * POST controller for submitting a new bug
     */
     @PostMapping("/report-bug")
-    public String reportBugSubmit(Authentication authentication, Bug bug, Model model) {
+    public String reportBugSubmit(Authentication authentication, Bug bug) {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged.getRoles().contains("ROLE_USER")) {
             if (userLogged.getBugsReported() < CustomAppSettings.MAXIMUM_BUG_REPORTS) {
@@ -68,7 +68,7 @@ public class BugController {
     }
 
     @GetMapping("/bug-fix")
-    public String fixBug(Authentication authentication, Model model, @RequestParam("id") Long id) {
+    public String fixBug(Authentication authentication, @RequestParam("id") Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         Bug bug = bugService.findById(id);
         bug.setFixed(true);
@@ -77,7 +77,7 @@ public class BugController {
     }
 
     @GetMapping("/bug-unfix")
-    public String unfixBug(Authentication authentication, Model model, @RequestParam("id") Long id) {
+    public String unfixBug(Authentication authentication, @RequestParam("id") Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         Bug bug = bugService.findById(id);
         bug.setFixed(false);

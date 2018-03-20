@@ -33,7 +33,7 @@ public class AppSettingsController {
     MessageService messageService;
 
     @GetMapping("/appsettings")
-    public String getSettings(Model model, Authentication authentication, HttpServletRequest req, @RequestParam(value = "motivationText", required = false) String checkbox) {
+    public String getSettings(Model model, Authentication authentication, HttpServletRequest req) {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);

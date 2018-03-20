@@ -63,7 +63,7 @@ public class BudgetController {
     }
 
     @PostMapping("/budget-new")
-    public String saveNewBudget(Model model, Budget budget, Authentication authentication) {
+    public String saveNewBudget(Budget budget, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
         if (budget.getTitle().length() >= 3 && budget.getBudgetAmount() >= 1) {
             Budget userBudget = new Budget(budget.getTitle(), budget.getBudgetAmount(), userLogged);
@@ -82,10 +82,8 @@ public class BudgetController {
             model.addAttribute("expense", new Expense());
             model.addAttribute("income", new Income());
             if (id != null) {
-                // Save the id in a attribute to save later values
                 Budget paramBudget = budgetService.findById(id);
                 model.addAttribute("paramBudget", paramBudget);
-                // Settings attributes
                 model.addAttribute("totalIncome", incomeService.getTotalIncome(paramBudget));
                 model.addAttribute("totalExpense", expenseService.getTotalExpense(paramBudget));
                 model.addAttribute("leftOver", budgetService.calculateLeftover(paramBudget));
@@ -115,7 +113,7 @@ public class BudgetController {
     }
 
     @GetMapping("/income-edit")
-    public String getEditIncome(Model model, Authentication authentication, @RequestParam Long id, Income income) {
+    public String getEditIncome(Model model, Authentication authentication, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         List<Budget> budgetList = budgetService.findAllByUser(userLogged);
         Income paramIncome = incomeService.findById(id);
@@ -150,14 +148,13 @@ public class BudgetController {
     }
 
     @GetMapping("/expense-edit")
-    public String getEditExpense(Model model, Authentication authentication, @RequestParam Long id, Expense expense) {
+    public String getEditExpense(Model model, Authentication authentication, @RequestParam Long id) {
         User userLogged = userService.findByUser(authentication.getName());
         List<Budget> budgetList = budgetService.findAllByUser(userLogged);
         Expense paramExpense = expenseService.findById(id);
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("previousBudget", paramExpense.getBudget().getId());
-            // Check of income is from the user
             if (budgetList.contains(paramExpense.getBudget())) {
                 model.addAttribute("expense", paramExpense);
                 return "expense-edit";
@@ -216,7 +213,7 @@ public class BudgetController {
 
 
     @PostMapping("/budget")
-    public String addIncome(@ModelAttribute("paramBudget") Budget paramBudget, @RequestParam("action") String action, Model model, Authentication authentication, Income income, Expense expense) {
+    public String addIncome(@ModelAttribute("paramBudget") Budget paramBudget, @RequestParam("action") String action, Income income, Expense expense) {
         if (action.contains("income")) {
             if (income.getAmount() > 0) {
                 incomeService.save(new Income(paramBudget, income.getDescription(), income.getAmount()));

@@ -40,10 +40,8 @@ public class MessageController {
     public String getInbox(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Message> messages = messageService.getMessagesByUser(userLogged);
-
         // Sort by id, last id's last (newest messages on top)
         messages.sort(Comparator.comparing(Message::getId).reversed());
-
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("messages", messages);
@@ -59,26 +57,23 @@ public class MessageController {
         // Get username and messages
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
-
             if (unreadMessages.size() >= 1) {
                 req.getSession().setAttribute("unreadMessages", unreadMessages.size()-1);
             }
         }
-
         if (id != null) {
             Message msg = messageService.getMessageById(id);
             model.addAttribute("message", msg);
             msg.setOpened(1);
             messageService.save(msg);
             return "message";
-        }
-        else {
+        } else {
             return "redirect:/messages";
         }
     }
 
     @GetMapping("/message-delete")
-    public String deleteMessage(Model model, Authentication authentication, @RequestParam Long id) {
+    public String deleteMessage(Authentication authentication, @RequestParam Long id) {
         User userLogged = getLoggedUser(authentication);
         List<Message> messages = messageService.getMessagesByUser(userLogged);
         if (messages.contains(messageService.getMessageById(id))) {
@@ -90,7 +85,7 @@ public class MessageController {
     }
 
     @GetMapping("/message-new")
-    public String newMessage(Model model, Authentication authentication, Message message) {
+    public String newMessage(Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
@@ -105,7 +100,6 @@ public class MessageController {
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
         }
-
         User receiver = userService.findByUser(message.getReceiver().getUsername());
         if (message.getReceiver().getId() != userLogged.getId()) {
             if (receiver != null) {
@@ -118,7 +112,6 @@ public class MessageController {
                 } else {
                     return "redirect:/message-new?emptytext";
                 }
-
             } else {
                 return "redirect:/message-new?notfound";
             }
@@ -132,7 +125,6 @@ public class MessageController {
     public String reply(Model model, Authentication authentication, Message message, @RequestParam Long id) {
         User userLogged = getLoggedUser(authentication);
         User recepient = userService.findById(id);
-
         if (recepient != null) {
             if (userLogged.getId() != id) {
                 model.addAttribute("recepient",recepient);
@@ -156,7 +148,6 @@ public class MessageController {
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
         }
-
         User target = userService.findById(id);
         if (target != null) {
             messageService.save(new Message(message.getSubject(), message.getMessageText(), new Date(Calendar.getInstance().getTime().getTime()), userLogged, target));

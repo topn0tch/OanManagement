@@ -42,7 +42,7 @@ public class RestUsersController {
     @GetMapping("/api/users/usernames")
     public List<String> getUsernames() {
         List<User> users = userService.findAll();
-        ArrayList<String> usernames = new ArrayList<String>();
+        ArrayList<String> usernames = new ArrayList<>();
         for (User user : users) {
             usernames.add(user.getUsername());
         }
@@ -77,7 +77,7 @@ public class RestUsersController {
     @GetMapping("/api/avatar/{id}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable Long id) {
-        Resource file = null;
+        Resource file;
         try {
             file = storageService.loadAsResource(id.toString()+".jpg");
         } catch (StorageFileNotFoundException e) {

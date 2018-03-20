@@ -63,7 +63,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/manageusers/{id}")
-    public String editUser(Model model, User user, @PathVariable Long id) {
+    public String editUser(User user, @PathVariable Long id) {
         User paramUser = userService.findById(id);
         userService.editByUser(paramUser, user.getFirstName(), user.getLastName(), user.getCountry(), user.getAge(),
                 user.getFacebook(), user.getSkype(), user.getGithub(), user.getTwitter(), user.getEmail(), user.getUsername());

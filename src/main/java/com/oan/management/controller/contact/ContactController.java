@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +47,7 @@ public class ContactController {
     }
 
     @GetMapping("/contact-new")
-    public String newContactPage(Model model, Contact contact, Authentication authentication) {
+    public String newContactPage(Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         model.addAttribute("contact", new Contact());
         if (userLogged != null) {
@@ -58,10 +57,9 @@ public class ContactController {
     }
 
     @PostMapping("/contact-new")
-    public String newcontact(Model model, Contact contact, BindingResult result, Authentication authentication) {
+    public String newcontact(Model model, Contact contact, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Contact> contactList = contactService.findByUser(userLogged);
-
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("contacts", contactList);
@@ -71,7 +69,7 @@ public class ContactController {
     }
 
     @GetMapping("/contacts-delete")
-    public String deleteContact(Model model, Contact contact, @RequestParam Long id, Authentication authentication) {
+    public String deleteContact(@RequestParam Long id, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Contact> contactList = contactService.findByUser(userLogged);
         if (contactList.contains(contactService.getOne(id))) {
@@ -83,7 +81,7 @@ public class ContactController {
     }
 
     @GetMapping("/contacts-edit")
-    public String editContactOnScreen(Model model, Contact contact, @RequestParam Long id, Authentication authentication) {
+    public String editContactOnScreen(Model model, @RequestParam Long id, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<Contact> contactList = contactService.findByUser(userLogged);
         if (userLogged != null) {

@@ -30,7 +30,6 @@ public class ListUsersController {
     public String listUsers(HttpServletRequest req, Model model, Authentication authentication) {
         User userLogged = getLoggedUser(authentication);
         List<User> users = userService.findAll();
-
         if (userLogged != null) {
             model.addAttribute("loggedUser", userLogged);
             model.addAttribute("users", users);

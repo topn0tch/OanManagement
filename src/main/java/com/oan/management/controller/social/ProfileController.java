@@ -29,13 +29,10 @@ public class ProfileController {
     @GetMapping("/profile")
     public String root(HttpServletRequest req, Model model, Authentication authentication, @RequestParam(required = false) Long id) {
         User userLogged = userService.findByUser(authentication.getName());
-
         model.addAttribute("loggedUser", userLogged);
-
         if (userLogged != null) {
             userService.updateUserAttributes(userLogged, req);
         }
-
         if (id != null) {
             User paramUser = userService.findById(id);
             if (paramUser != null) {

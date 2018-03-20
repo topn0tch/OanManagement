@@ -37,7 +37,7 @@ public class SettingsController {
     }
 
     @PostMapping("/settings")
-    public String setSettings(Model model, User user, Authentication authentication) {
+    public String setSettings(User user, Authentication authentication) {
         User userLogged = userService.findByUser(authentication.getName());
         if (userLogged != null) {
             userLogged.setCountry(user.getCountry());
