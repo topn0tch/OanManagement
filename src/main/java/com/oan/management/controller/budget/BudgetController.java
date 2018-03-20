@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Comparator;
@@ -117,21 +114,6 @@ public class BudgetController {
         }
     }
 
-    @GetMapping("/income-delete")
-    public String deleteIncome(Authentication authentication, @RequestParam Long id) {
-        User userLogged = userService.findByUser(authentication.getName());
-        List<Budget> budgetList = budgetService.findAllByUser(userLogged);
-        Income paramIncome = incomeService.findById(id);
-        // Check of income is from the user
-        if (budgetList.contains(paramIncome.getBudget())) {
-            Long redirectBack = paramIncome.getBudget().getId();
-            incomeService.deleteById(id);
-            return "redirect:budget?id="+redirectBack;
-        } else {
-            return "redirect:budget-list";
-        }
-    }
-
     @GetMapping("/income-edit")
     public String getEditIncome(Model model, Authentication authentication, @RequestParam Long id, Income income) {
         User userLogged = userService.findByUser(authentication.getName());
@@ -153,11 +135,12 @@ public class BudgetController {
     }
 
     @PostMapping("/income-edit")
-    public String editIncome(Authentication authentication, Income income, @RequestParam Long id) {
+    public String editIncome(Income income, @RequestParam Long id) {
         if (income.getDescription().length() > 0 && income.getDescription().length() <= 50) {
+            Long redirect = incomeService.findById(id).getBudget().getId();
             if (income.getAmount() > 0 && income.getAmount() < CustomAppSettings.MAXIMUM_INCOME_AND_EXPENSE_AMOUNT) {
                 incomeService.editById(id, income.getDescription(), income.getAmount());
-                return "redirect:/budget?id="+incomeService.findById(id).getBudget().getId();
+                return "redirect:/budget?id="+redirect;
             } else {
                 return "redirect:/budget?error";
             }
@@ -187,7 +170,7 @@ public class BudgetController {
     }
 
     @PostMapping("/expense-edit")
-    public String editExpense(Authentication authentication, Expense expense, @RequestParam Long id) {
+    public String editExpense(Expense expense, @RequestParam Long id) {
         if (expense.getDescription().length() > 0 && expense.getDescription().length() <= 50) {
             if (expense.getAmount() > 0 && expense.getAmount() < CustomAppSettings.MAXIMUM_INCOME_AND_EXPENSE_AMOUNT) {
                 expenseService.editById(id, expense.getDescription(), expense.getAmount());
@@ -200,26 +183,40 @@ public class BudgetController {
         }
     }
 
-    @GetMapping("/expense-delete")
-    public String deleteExpense(Authentication authentication, @RequestParam Long id) {
-        User userLogged = userService.findByUser(authentication.getName());
-        List<Budget> budgetList = budgetService.findAllByUser(userLogged);
-        Expense paramExpense = expenseService.findById(id);
-
-        // Check of income is from the user
-        if (budgetList.contains(paramExpense.getBudget())) {
-            Long redirectBack = paramExpense.getBudget().getId();
-            expenseService.deleteById(id);
-            return "redirect:budget?id="+redirectBack;
+    @GetMapping("/budget/{type}/delete/{id}")
+    public String deleteExpenseOrIncome(Authentication authentication, @PathVariable("type") String type, @PathVariable("id") Long id) {
+        if (authentication != null) {
+            User userLogged = userService.findByUser(authentication.getName());
+            List<Budget> budgetList = budgetService.findAllByUser(userLogged);
+            if (type.contains("expense") ) {
+                Expense paramExpense = expenseService.findById(id);
+                if (budgetList.contains(expenseService.findById(id).getBudget())) {
+                    Long redirectBack = paramExpense.getBudget().getId();
+                    expenseService.deleteById(id);
+                    return "redirect:/budget?id=" + redirectBack;
+                } else {
+                    return "redirect:/budget-list";
+                }
+            } else if (type.contains("income")) {
+                Income paramIncome = incomeService.findById(id);
+                if (budgetList.contains(paramIncome.getBudget())) {
+                    Long redirectBack = paramIncome.getBudget().getId();
+                    incomeService.deleteById(id);
+                    return "redirect:/budget?id=" + redirectBack;
+                } else {
+                    return "redirect:/budget-list";
+                }
+            } else {
+                return "redirect:/budget-list";
+            }
         } else {
-            return "redirect:budget-list";
+            return "redirect:/login";
         }
     }
 
+
     @PostMapping("/budget")
     public String addIncome(@ModelAttribute("paramBudget") Budget paramBudget, @RequestParam("action") String action, Model model, Authentication authentication, Income income, Expense expense) {
-        User userLogged = userService.findByUser(authentication.getName());
-
         if (action.contains("income")) {
             if (income.getAmount() > 0) {
                 incomeService.save(new Income(paramBudget, income.getDescription(), income.getAmount()));
