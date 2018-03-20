@@ -22,6 +22,9 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Autowired
     ExpenseRepository expenseRepository;
 
+    @Autowired
+    IncomeService incomeService;
+
     @Override
     public Expense findById(Long id) {
         return expenseRepository.findById(id);
@@ -34,11 +37,12 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     /**
      * Calculates the total of expenses from a List
-     * @param expenseList {@link List} of {@link Expense}
+     * @param budget
      * @return Double
      */
     @Override
-    public Double getTotalExpense(List<Expense> expenseList) {
+    public Double getTotalExpense(Budget budget) {
+        List<Expense> expenseList = expenseRepository.findAllByBudget(budget);
         Double total = 0.0;
         for (Expense expense : expenseList) {
             total += expense.getAmount();
@@ -69,5 +73,10 @@ public class ExpenseServiceImpl implements ExpenseService {
         expense.setDescription(description);
         expense.setAmount(amount);
         return expenseRepository.save(expense);
+    }
+
+    @Override
+    public Double calculateExpensesPercent(Budget budget) {
+        return getTotalExpense(budget) / (incomeService.getTotalIncome(budget) + budget.getBudgetAmount()) *100;
     }
 }

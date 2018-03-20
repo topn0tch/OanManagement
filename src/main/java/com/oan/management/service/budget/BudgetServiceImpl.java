@@ -1,6 +1,8 @@
 package com.oan.management.service.budget;
 
 import com.oan.management.model.Budget;
+import com.oan.management.model.Expense;
+import com.oan.management.model.Income;
 import com.oan.management.model.User;
 import com.oan.management.repository.budget.BudgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class BudgetServiceImpl implements BudgetService{
 
     @Autowired
     ExpenseService expenseService;
+
+    @Autowired
+    IncomeService incomeService;
 
     /**
      * Retrieve a list of all budgets
@@ -70,5 +75,12 @@ public class BudgetServiceImpl implements BudgetService{
     @Override
     public void deleteById(Long id) {
         budgetRepository.delete(budgetRepository.findById(id));
+    }
+
+    @Override
+    public Double calculateLeftover(Budget budget) {
+        List<Income> incomeList = incomeService.findAllByBudget(budget);
+        List<Expense> expenseList = expenseService.findAllByBudget(budget);
+        return (budget.getBudgetAmount() + (incomeService.getTotalIncome(budget) - expenseService.getTotalExpense(budget)));
     }
 }

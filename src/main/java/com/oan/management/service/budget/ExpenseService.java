@@ -11,8 +11,9 @@ import java.util.List;
 public interface ExpenseService {
     Expense findById(Long id);
     List<Expense> findAllByBudget(Budget budget);
-    Double getTotalExpense(List<Expense> expenseList);
+    Double getTotalExpense(Budget budget);
     void deleteById(Long id);
     Expense save(Expense expense);
     Expense editById(Long id, String description, Double amount);
+    Double calculateExpensesPercent(Budget budget);
 }

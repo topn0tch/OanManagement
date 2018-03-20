@@ -14,4 +14,5 @@ public interface BudgetService {
     Budget save(Budget budget);
     Budget findById(Long id);
     void deleteById(Long id);
+    Double calculateLeftover(Budget budget);
 }

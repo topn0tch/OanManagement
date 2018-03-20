@@ -21,6 +21,9 @@ public class IncomeServiceImpl implements IncomeService {
     @Autowired
     IncomeRepository incomeRepository;
 
+    @Autowired
+    ExpenseService expenseService;
+
     /**
      * Returns an {@link Income} by the specified id
      * @param id Long
@@ -43,11 +46,12 @@ public class IncomeServiceImpl implements IncomeService {
 
     /**
      * Calculates a total value from a List of income's.
-     * @param incomeList List of Income's
+     * @param budget
      * @return Double of the total value
      */
     @Override
-    public Double getTotalIncome(List<Income> incomeList) {
+    public Double getTotalIncome(Budget budget) {
+        List<Income> incomeList = incomeRepository.findAllByBudget(budget);
         Double total = 0.0;
         for (Income income : incomeList) {
             total += income.getAmount();
@@ -87,5 +91,10 @@ public class IncomeServiceImpl implements IncomeService {
         income.setDescription(description);
         income.setAmount(amount);
         return incomeRepository.save(income);
+    }
+
+    @Override
+    public Double calculateIncomesPercent(Budget budget) {
+        return 100 - expenseService.calculateExpensesPercent(budget);
     }
 }

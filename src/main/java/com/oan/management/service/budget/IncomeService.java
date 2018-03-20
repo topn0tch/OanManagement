@@ -11,8 +11,9 @@ import java.util.List;
 public interface IncomeService {
     Income findById(Long id);
     List<Income> findAllByBudget(Budget budget);
-    Double getTotalIncome(List<Income> incomeList);
+    Double getTotalIncome(Budget budget);
     void deleteById(Long id);
     Income save(Income income);
     Income editById(Long id, String description, Double amount);
+    Double calculateIncomesPercent(Budget budget);
 }

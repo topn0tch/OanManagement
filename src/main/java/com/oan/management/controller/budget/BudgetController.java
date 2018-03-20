@@ -91,24 +91,13 @@ public class BudgetController {
                 // Get incomes and expenses
                 List<Income> incomeList = incomeService.findAllByBudget(paramBudget);
                 List<Expense> expenseList = expenseService.findAllByBudget(paramBudget);
-                // Get the total of incomes and expenses
-                Double totalIncome = incomeService.getTotalIncome(incomeList);
-                Double totalExpense = expenseService.getTotalExpense(expenseList);
-
-                // Calculations
-                Double leftOver = (paramBudget.getBudgetAmount() + (totalIncome - totalExpense));
-                Double expensesPercent = totalExpense / (totalIncome+paramBudget.getBudgetAmount()) * 100;
-                Double incomesPercent = 100 - expensesPercent;
-                Double budgetLeft = paramBudget.getBudgetAmount() + totalIncome - totalExpense;
                 // Settings attributes
-                model.addAttribute("paramBudget", paramBudget);
-                model.addAttribute("totalIncome", totalIncome);
-                model.addAttribute("totalExpense", totalExpense);
-                model.addAttribute("leftOver", leftOver);
-                model.addAttribute("budgetLeft", budgetLeft);
+                model.addAttribute("totalIncome", incomeService.getTotalIncome(paramBudget));
+                model.addAttribute("totalExpense", expenseService.getTotalExpense(paramBudget));
+                model.addAttribute("leftOver", budgetService.calculateLeftover(paramBudget));
                 // Percentages for progress bar
-                model.addAttribute("expensesPercent", expensesPercent);
-                model.addAttribute("incomesPercent", incomesPercent);
+                model.addAttribute("expensesPercent", expenseService.calculateExpensesPercent(paramBudget));
+                model.addAttribute("incomesPercent", incomeService.calculateIncomesPercent(paramBudget));
                 // Lists
                 model.addAttribute("incomeList", incomeList);
                 model.addAttribute("expenseList", expenseList);
