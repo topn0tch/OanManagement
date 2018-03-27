@@ -32,7 +32,7 @@ $(document).ready(function () {
                 }
             }
         });
-    }, 5000);//time in milliseconds
+    }, 5000);
 })
 
 function newMessageNotification() {
