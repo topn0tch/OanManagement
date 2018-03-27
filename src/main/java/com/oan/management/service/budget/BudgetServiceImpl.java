@@ -1,8 +1,6 @@
 package com.oan.management.service.budget;
 
 import com.oan.management.model.Budget;
-import com.oan.management.model.Expense;
-import com.oan.management.model.Income;
 import com.oan.management.model.User;
 import com.oan.management.repository.budget.BudgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,8 +77,6 @@ public class BudgetServiceImpl implements BudgetService{
 
     @Override
     public Double calculateLeftover(Budget budget) {
-        List<Income> incomeList = incomeService.findAllByBudget(budget);
-        List<Expense> expenseList = expenseService.findAllByBudget(budget);
         return (budget.getBudgetAmount() + (incomeService.getTotalIncome(budget) - expenseService.getTotalExpense(budget)));
     }
 }

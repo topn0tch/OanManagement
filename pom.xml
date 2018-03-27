@@ -127,6 +127,12 @@
             <artifactId>datatables</artifactId>
             <version>1.9.4-2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>datatables</artifactId>
+            <version>1.10.16</version>
+        </dependency>
     </dependencies>
 
     <build>

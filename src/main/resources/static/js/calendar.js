@@ -30,7 +30,7 @@ $(document).ready(function () {
         nowIndicator: true,
         timeFormat: 'H:mm',
         slotLabelFormat: 'H:mm',
-        columnHeaderFormat: 'dddd',
+        columnHeaderFormat: 'dddd DD/M',
         allDayText: 'Whole day',
         views: {
             month: {

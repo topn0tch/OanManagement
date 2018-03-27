@@ -27,7 +27,6 @@ $(document).ready(function () {
                         $('#hasNoMessages').html("You have <strong>new</strong> messages!");
                     } else {
                         $('#newMessageCountNavigation').text(parseInt($('#newMessageCountNavigation').text())+1);
-                        // $('#tempBadge').text(parseInt($('#newMessageCountNavigation').text())+1);
                     }
                     $('#newMessageCountWidget').text(parseInt($('#newMessageCountWidget').text())+1);
                 }

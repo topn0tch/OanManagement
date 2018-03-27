@@ -1,27 +1,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="header">
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <head th:fragment="header">
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/animate.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/Roboto.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/pace/1.0.2/themes/blue/pace-theme-minimal.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome_5-0-7.css}" />
 
-    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-
-    <!-- notifications-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.7/bootstrap-notify.js"/>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
-
-
-    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto}" rel="stylesheet"/>
-
-    <script th:src="@{/webjars/pace/1.0.2/pace.min.js}"></script>
-    <link rel="stylesheet" th:href="@{/webjars/pace/1.0.2/themes/blue/pace-theme-minimal.css}"/>
-    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet"/>
-
-    <!--AJAX checking for new messages-->
-    <script src="js/getnotifications.js"></script>
-</head>
+        <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+        <script src="/js/bootstrap-notify.js"/>
+        <script th:src="@{/webjars/pace/1.0.2/pace.min.js}"></script>
+        <script src="js/getnotifications.js"></script>
+    </head>
 </html>
