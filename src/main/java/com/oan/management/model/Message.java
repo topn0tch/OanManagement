@@ -13,6 +13,8 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String subject;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String messageText;
     private Date date;
     private int opened;
