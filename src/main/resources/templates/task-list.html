@@ -91,6 +91,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!--In case it's empty... looks better-->
+                    <tr th:if="${#lists.isEmpty(tasks)}">
+                        <td>No tasks</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     <tr id="todoTableRow" th:each="task : ${tasks}">
                         <td><span th:text="${task.description}"></span> <span th:if="${#strings.toString(task.targetDate)} == ${today}" class="label label-danger marginleft">Today</span><span th:if="${task.user} != ${task.creator}"><small class="marginleft" style="color: #666666"> from <a th:href="@{/profile(id=${task.creator.id})}"><span th:text="${task.creator.firstName}+ ' '+${task.creator.lastName}"></span></a> </small></span></td>
                         <td th:text="${#dates.format(task.targetDate, 'dd MMMMM yyyy')}"></td>

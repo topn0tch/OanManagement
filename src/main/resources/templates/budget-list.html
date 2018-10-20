@@ -54,6 +54,7 @@
                             </tr>
                             </tbody>
                         </table>
+                        <p th:if="${#lists.isEmpty(budgetList)}" style="margin-left: 5px; margin-top: 5px">No budgets</p>
                     </div>
                     <a href="/budget-new" class="btn btn-success pull-right"><span class="fa fa-plus"></span> New budget</a>
                 </div>

@@ -273,7 +273,7 @@ th.fc-day-header.fc-sat, th.fc-day-header.fc-sun{
 
 .fc-today .fc-day-number {
     border-radius: 50%;
-    width: 16px;
+    /*width: 16px;*/
     height: 16px;
     margin: 2px;
     background: #FFF;
